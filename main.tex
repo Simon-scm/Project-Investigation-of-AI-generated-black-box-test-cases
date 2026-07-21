@@ -1,0 +1,225 @@
+\documentclass[
+  a4paper,
+  12pt,
+  oneside
+]{article}
+
+% -------------------------------------------------
+% Sprache & Kodierung
+% -------------------------------------------------
+\usepackage[ngerman]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{microtype}
+\usepackage{hyperref}
+\hypersetup{
+  hidelinks
+}
+
+% -------------------------------------------------
+% Seitenlayout
+% -------------------------------------------------
+\usepackage[
+  a4paper,
+  top=4cm,
+  bottom=2cm,
+  left=4cm,
+  right=2cm,
+  headsep=2cm,
+  footskip=2cm
+]{geometry}
+
+% -------------------------------------------------
+% Schriftart
+% -------------------------------------------------
+\usepackage{newtxtext}
+\usepackage{newtxmath}
+
+% -------------------------------------------------
+% Zeilenabstand
+% -------------------------------------------------
+\usepackage{setspace}
+\onehalfspacing
+
+% -------------------------------------------------
+% Kopf- und Fußzeile
+% -------------------------------------------------
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\raisebox{0.5cm}{\thepage}}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% -------------------------------------------------
+% Absatzformat
+% -------------------------------------------------
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+% -------------------------------------------------
+% Überschriftenabstände
+% -------------------------------------------------
+\usepackage{titlesec}
+\titlespacing*{\section}{0pt}{12pt}{6pt}
+\titlespacing*{\subsection}{0pt}{12pt}{6pt}
+\titlespacing*{\subsubsection}{0pt}{12pt}{6pt}
+
+% -------------------------------------------------
+% Abbildungen & Tabellen
+% -------------------------------------------------
+\usepackage{graphicx}
+\usepackage{caption}
+\captionsetup{font=small}
+\captionsetup[figure]{position=below}
+\captionsetup[table]{position=above}
+
+% -------------------------------------------------
+% Fußnoten
+% -------------------------------------------------
+\usepackage[hang,flushmargin]{footmisc}
+\setlength{\footnotesep}{8pt}
+
+% Strich zwischen Text und Fußnote
+\renewcommand{\footnoterule}{%
+  \kern -8pt
+  \hrule width 0.3\textwidth
+  \kern 6pt
+}
+
+% Abstand Text ↔ Fußnotenbereich
+\setlength{\skip\footins}{12pt}
+
+% Schriftgröße & Zeilenabstand Fußnoten
+\makeatletter
+\renewcommand\footnotesize{%
+  \fontsize{10pt}{12pt}\selectfont
+}
+\makeatother
+
+% -------------------------------------------------
+% Literaturverzeichnis
+% -------------------------------------------------
+\usepackage[
+  backend=biber,
+  style=ieee,
+  sorting=none
+]{biblatex}
+\addbibresource{literature.bib}
+\usepackage{csquotes}
+
+\usepackage{pdfpages}
+
+\usepackage{listings}
+\lstset{
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    columns=fullflexible,
+    keepspaces=true
+}
+
+\usepackage{acronym}
+
+% -------------------------------------------------
+% Dokumentbeginn
+% -------------------------------------------------
+\begin{document}
+
+% -------------------------------------------------
+% Titelblatt (keine Seitenzahl)
+% -------------------------------------------------
+\begin{titlepage}
+\thispagestyle{empty}
+\begin{center}
+\includegraphics[width=0.4\textwidth]{assets/FOM.jpg}
+\vspace*{0.5cm}
+
+
+\textbf{\Large FOM Hochschule für Oekonomie und Management}\\[0.5cm]
+
+Digitales Live Studium\\[1cm]
+\textbf{Projektarbeit}\\[0.4cm]
+
+in dem Modul Künstliche Intelligenz\\[1cm]
+über das Thema:\\[1cm]
+
+\textbf{\Large Entwicklung und Evaluation eines KI-basierten Assistenzsystems zur Generierung von Black-Box-Testfällen aus natürlichsprachlichen Programmieraufgaben}\\[1cm]
+
+von\\[0.5cm]
+Simon Schmitz\\[2cm]
+\end{center}
+
+\begin{tabular}{ll}
+Vorgelegt bei: & Prof. Dr. Klemens Waldhör \\
+Matrikelnummer: & 821212 \\
+Abgabedatum: & 31.07.2026 \\
+\end{tabular}
+
+\vfill
+
+\end{titlepage}
+
+% -------------------------------------------------
+% Verzeichnisse (römisch, Start bei II)
+% -------------------------------------------------
+\pagenumbering{Roman}
+\setcounter{page}{2}
+
+%\abstract
+%\clearpage
+
+\tableofcontents
+\clearpage
+
+\phantomsection
+\addcontentsline{toc}{section}{Abbildungsverzeichnis}
+\listoffigures
+\clearpage
+
+%\listoftables
+%\clearpage
+
+\phantomsection
+\addcontentsline{toc}{section}{Abkürzungsverzeichnis}
+\input{kapitel/abkuerzungsverzeichnis.tex}
+\clearpage
+
+
+% -------------------------------------------------
+% Textteil
+% -------------------------------------------------
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\input{kapitel/einleitung}
+
+\input{kapitel/theoretische_grundlagen}
+
+\input{kapitel/konzeption_und_umsetzung}
+
+\input{kapitel/evaluationsmethode}
+
+\input{kapitel/ergebnisse}
+
+\input{kapitel/fazit}
+
+% -------------------------------------------------
+% Literaturverzeichnis
+% -------------------------------------------------
+\clearpage
+\phantomsection
+\addcontentsline{toc}{section}{Literaturverzeichnis}
+\printbibliography[title={Literaturverzeichnis}]
+\newpage
+
+% -------------------------------------------------
+% Anhang
+% -------------------------------------------------
+\input{kapitel/anhang}
+
+% -------------------------------------------------
+% Eigenständigkeitserklärung
+% -------------------------------------------------
+%\input{kapitel/eigenstaendigkeit}
+
+\end{document}

@@ -1,0 +1,39 @@
+## --- Core LaTeX Auxiliary Files ---
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+
+## --- Bibliography Files ---
+*.bbl
+*.bbl-SAVE-ERROR
+*.blg
+*.bcf
+*.run.xml
+
+## --- Lists (Tables, Figures) ---
+*.lof
+*.lot
+
+## --- Glossary / Index ---
+*.glo
+*.idx
+*.ist
+*.acn
+*.acr
+*.alg
+*.glg
+*.gls
+
+## --- Output (Optional, siehe unten) ---
+*.pdf
+
+## --- OS / Editor Specific ---
+.DS_Store
+.vscode/
+.idea/
+*.swp
+*~
