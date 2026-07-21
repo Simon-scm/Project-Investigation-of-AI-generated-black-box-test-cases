@@ -1,12 +1,51 @@
 \section{Theoretische Grundlagen}
 
-\subsection{Softwaretests und Testfälle}
+\subsection{Software-Testing und Testfälle}
+Der Bereich des Software-Testings beschäftigt sich damit, Systeme und Programme auf ihre Korrektheit, Funktionalität, 
+Vollständigkeit, Sicherheit und generelle Qualität zu überprüfen (Kahn 2012). Allgemeiner formuliert besteht das Ziel von Software-Testing darin, Abweichungen zwischen dem 
+spezifizierten und dem tatsächlichen Verhalten eines Systems zu identifizieren. Programme werden also unter festgelegten Bedingungen ausgeführt, wodurch geprüft werden kann, 
+ob die vorab definierten Anforderungen erfüllt werden oder ob Fehler auftreten. 
 
+Konzeptionell lassen sich die verschiedene Arten und Techniken zum testen von Software in zwei Kategorien einteilen, dem White-Box-Testing und dem Black-Box-Testing (Nidhra 2012).
+Für das White-Box-Testing benötigt der Tester und Testfallersteller vollen Zugang zum Quellcode des Programms. Die Tests überprüfen primär die interne Logik und Struktur des
+Codes indem Funktionen mit unterschiedlichen Parametern ausgeführt werden um möglichst viele logische Wege im Programmablauf auf ihre Funktionalität untersuchen 
+zu können (Verma 2017). 
+Das Black-Box-Testing oder auch Functional-Testing genannt, behandelt den Quellcode des zu testenden Programms hingegen wie eine undurchsichtige Box, deren Inhalt 
+nicht bekannt ist und auch nicht bekannt sein soll. Ohne Wissen über die internen Ablaufe und Logiken werden Testfälle und erwartete Ergebnisse nur aus Spezifikationen 
+oder Beschreibungen über das gewünschte Verhalten eines Programms abgeleitet (Verma 2017). Auf Basis dieser Testfälle wird anschließend geprüft ob das Programm die definierte 
+Funktionalität erfüllt.
 
-\subsection{Black-Box-Testing}
+Durch beide Testverfahren können zwar Fehler erkannt werden, jedoch kann grundsätzlich nicht garantiert werden, 
+dass ein Programm vollständig fehlerfrei ist. Selbst bei kleineren Eingabebereichen ist die Anzahl an verschiedenen Eingabekombinationen bereits so groß, dass eine vollständige 
+Prüfung nicht praktikabel oder gar unmöglich ist.
+
+Diese Projektarbeit baut wesentlich auf dem Konzept des Black-Box-Testings auf. Vor dem Hintergrund, dass Large Language Models zunehmend zur Generierung von Quellcode 
+eingesetzt werden, liegt es nahe, sie zugleich auch Tests und Testfälle für den erzeugten Code erstellen zu lassen. Dabei entsteht jedoch ein methodisches Risiko.
+Hat das Modell die spezifizierte Funktionalität bereits im Code falsch umgesetzt, kann nicht ausgeschlossen werden, dass es anschließend Testfälle mit erwarteten 
+Ergebnissen generiert, die auf derselben Fehlinterpretation beruhen. In diesem Fall würden die Tests nicht das ursprünglich geforderte Verhalten prüfen, sondern lediglich 
+bestätigen, dass der erzeugte Code konsistent mit der eigenen, möglicherweise fehlerhaften Auslegung der Aufgabe arbeitet. Vor diesem Hintergrund erscheint es besonders 
+relevant zu untersuchen, wie zuverlässig ein Large Language Model Testfälle ausschließlich aus der natürlichsprachlichen Spezifikation ableiten kann, ohne Zugriff auf die 
+konkrete Implementierung zu erhalten.
+
+Gerade beim Black-Box-Testing hängt
+die Qualität eines Testprozesse maßgeblich von der Auswahl geeigneter Testfälle ab. Nach der Definition des International Software Testing Qualifications Board 
+besteht ein Testfall primär aus Vorbedingungen, Eingaben, gegebenenfalls auszuführende Aktionen, erwartete Ergebnisse und 
+Nachbedingungen (ISTQB). 
+Für die in dieser Projektarbeit betrachteten algorithmischen Programmieraufgabe lässt sich die allgemeine Definition vereinfachen. Da jede Aufgabe festgelgte Parameter und 
+Rückgabewerte definiert, besteht ein Testfall immer aus einer konkreten Eingabe und dem dazugehörigen erwarteten Ergebnis. Das erwartete Ergebnis beschreibt das Verhalten, 
+das gemäß Spezifikation bei den jeweiligen Testfällen eintreten soll (ISTQB). Bei der Testdurchführung wird das erwartete Ergebnis mit dem tatsächlichen Ergebnis der Implementierung 
+verglichen.
+
+Für diese Untersuchung ist diese Zweitligkeit eines Testfalls in Eingabe und erwarteten Ergebnis
+besonders relevant, da beide Angaben von dem verwendeten Large Language Model auf Basis einer natürlich sprachlichen Programmieraufgabe (Spezifikation des Soll-Verahltens) 
+erzeugt werden. Die Korrektheit des von der KI erwarteten Ergebnis hängt davon ab, wie gut das Modell die Programmieraufgabe verstanden hat und wie gut es damit 
+in der Lage war das Soll-Ergebnis der eigenen Testfälle vorherzusagen.
+In dieser Projektarbeit wird ein KI-generierter Testfall demnach erst als valide eingestuft, wenn die Eingabe den jeweiligen Einschränkungen innerhalb der Programmieraufgabe 
+entspricht und das von der KI erwartete Ergebnis mit dem Ergebnis der korrkten Referenzimplementierung übereinstimmt. Erst dann kann untersucht werden ob die Gruppe an Testfällen 
+auch bewusst fehlerhafte Implementierungen identifizieren kann.
 
 
 \subsection{Large Language Models und KI-gestützte Testfallgenerierung}
-
+It is measured to be labour intensive and expensive, which accounts for > 50 \% of the total cost of software development. (Nidhra 2012)
 \newpage
 
