@@ -53,7 +53,7 @@ Der Prozess kann aufgelistet dargestellt werden als,
 
 \subsection{Aufbau des System-Prompts}
 Um dem LLM mehr Kontext und klare Guidlines zu geben, wird jeder Anfrage ein einheitlicher und vorab festgelegter System-Prompt beigefügt.
-Dieser System-Prompt stellt die einzige Möglichkeit dar, indirekt Einfluss auf die Qulität der Ausgabe und somit auf die 
+Dieser System-Prompt stellt eine entscheidende Möglichkeit dar, indirekt Einfluss auf die Qulität der Ausgabe und somit auf die 
 Qualität der generierten Testfälle zu nehmen.
 Die von Nutzer eingegebenen konkrete Aufgabenbeschreibung wird davon getrennt als Benutzernachricht
 übermittelt. Diese Trennung verhindert, dass Instruktionen zur Rolle des LLM's, zum
@@ -68,7 +68,7 @@ Der System-Prompt setzt sich konzeptionell aus fünf Bestandteilen zusammen:
     \item \textbf{Rollenbeschreibung:} Das Modell wird als Assistenzsystem zur
           Generierung von Black-Box-Testfällen aus natürlichsprachlichen
           Programmieraufgaben definiert. Dadurch wird die Aufgabe des Modells
-          gegenüber einer allgemeinen Codegenerierung abgegrenzt.
+          eingegrenzt und klar beschrieben.
     \item \textbf{Generierungsziel:} Für die übergebene Aufgabe sollen genau
           15 Testfälle einschließlich des jeweils erwarteten korrekten Outputs
           erzeugt werden. Die feste Anzahl ermöglicht eine vergleichbare
@@ -76,47 +76,34 @@ Der System-Prompt setzt sich konzeptionell aus fünf Bestandteilen zusammen:
     \item \textbf{Abdeckungsanforderung:} Das Modell wird angewiesen, typische
           Fehler und Randfälle zu berücksichtigen. Die Testfälle sollen so
           gewählt werden, dass fehlerhafte Implementierungen möglichst
-          erkannt werden. Damit wird neben gewöhnlichen Eingaben insbesondere
-          die Edge-Case-Abdeckung adressiert.
+          erkannt werden. Damit wird neben gewöhnlichen Eingaben explizit
+          eine Edge-Case-Abdeckung gefordert.
     \item \textbf{Gültigkeitsbedingungen:} Alle in der Aufgabenbeschreibung
-          genannten Constraints sind zwingend einzuhalten. Eingabewerte
-          außerhalb der erlaubten Bereiche sind ausgeschlossen. Bereits in der
-          Aufgabe enthaltene Beispieltestfälle dürfen nicht erneut verwendet
-          werden. Diese Vorgaben sollen sowohl unzulässige Eingaben als auch
+          genannten Eingabeeinschränkungen (Constraints) sind zwingend einzuhalten. Eingabewerte
+          außerhalb der erlaubten Bereiche sollen ausgeschlossen werden. Wenn die Aufgabe 
+          Beispieltestfälle enthält, dürfen diese nicht erneut verwendet werden.
+          Diese Vorgaben sollen sowohl unzulässige Eingaben als auch
           eine künstliche Verbesserung der Abdeckung durch kopierte Beispiele
           vermeiden.
-    \item \textbf{Ausgabevertrag:} Die Antwort muss ausschließlich aus einem
-          gültigen JSON-Objekt bestehen. Jeder Testfall enthält die für die
+    \item \textbf{Ausgabevertrag:} Die Antwort des LLM's soll ausschließlich aus einem
+          gültigen JSON-Objekt bestehen. Jeder einzelne Testfall enthält die für die
           jeweilige Funktionssignatur erforderlichen Eingabevariablen und das
-          Feld \texttt{expected}. Markdown-Codeblöcke und zusätzliche
-          Erläuterungen außerhalb des JSON-Objekts sind untersagt.
+          Feld \texttt{expected}, welches das vom Modell erwartete Ergebnis speichert.
 \end{enumerate}
 
-Der Prompt gibt ein abstraktes JSON-Schema mit den Schlüsseln
-\texttt{test1}, \texttt{test2} und so weiter vor. Die Eingabevariablen werden
-nicht fest benannt, da die untersuchten Programmieraufgaben unterschiedliche
-Funktionssignaturen besitzen. Stattdessen wird das Modell explizit
-aufgefordert, Namen und Anzahl der Variablen an die konkrete Aufgabe
-anzupassen. So kann dasselbe Ausgabeprinzip beispielsweise skalare Werte,
-Zeichenketten, Listen oder verschachtelte Listen abbilden.
+Das vorgegebene JSON-Ausgabeformat wurde gewählt um die
+Antwort in der Benutzeroberfläche konsistent und kompakt darstellbar zu machen und
+um die Testfälle ohne manuelle Umformung in die von dem Projekt verwendete Testsimulation
+einlesen zu können.
 
-Die Vorgabe eines reinen JSON-Formats erfüllt zwei Zwecke. Erstens wird die
-Antwort in der Benutzeroberfläche konsistent und kompakt dargestellt.
-Zweitens kann sie ohne manuelle Umformung von der im Projekt verwendeten
-Testsimulation eingelesen werden. Das Feld \texttt{expected} bildet dabei die
-Grundlage für den späteren Vergleich zwischen dem vom Modell vorhergesagten
-Sollwert und dem tatsächlichen Ergebnis einer Implementierung.
-
-Trotz der präzisen Vorgaben stellt der Prompt keine formale Garantie für
-gültiges JSON, eingehaltene Constraints oder fachlich korrekte Sollwerte dar.
-Ein Sprachmodell erzeugt seine Antwort probabilistisch und führt die
-beschriebene Funktion nicht zwangsläufig aus. Aus diesem Grund werden die
-generierten Testfälle in der anschließenden Evaluation zunächst mit einer
-korrekten Referenzimplementierung validiert. Erst nach dem Ausschluss
+Trotz der präzisen Vorgaben stellt der Prompt keine formale Garantie für ein 
+gültiges Ausgabeformat, eingehaltene Constraints oder fachlich korrekte Sollwerte dar.
+Wie im vorherigen Kapitel beschrieben erzeugt ein LLM seine Antwort auf Basis 
+von Wahrscheinlichkeitsverteilungen und überführt die
+beschriebenen Funktionalitäten nicht zwangsläufig in korrekte Ausgaben. 
+Aus diesem Grund werden die generierten Testfälle in der anschließenden Evaluation zunächst mit einer
+korrekten Referenzimplementierung validiert und erst nach Ausschluss
 unzulässiger Eingaben und fehlerhafter Sollwerte wird beurteilt, ob die
-verbleibenden Testfälle bewusst fehlerhafte Implementierungen erkennen. Die
-Promptgestaltung und die nachgelagerte Validierung ergänzen sich somit: Der
-Prompt reduziert vermeidbare Format- und Gültigkeitsfehler, während die
-experimentelle Prüfung verbleibende fachliche Abweichungen sichtbar macht.
+verbleibenden Testfälle bewusst fehlerhafte Implementierungen erkennen.
 
 \newpage
