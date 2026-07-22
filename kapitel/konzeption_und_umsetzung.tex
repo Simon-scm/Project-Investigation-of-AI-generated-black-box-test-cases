@@ -1,13 +1,122 @@
 \section{Konzeption und Umsetzung des Assistenzsystems}
 
-\subsection{Ziel und Funktionsumfang}
+\subsection{Funktionsumfang und Architektur}
+Im Rahmen dieser Projektarbeit wurde ein webbasiertes Assistenzsystem zur
+KI-gestützten Generierung von Black-Box-Testfällen entwickelt.
+Das Ziel des Assistenzsystems ist es, aus der Beschreibung einer
+Programmieraufgabe automatisiert Black-Box-Testfälle abzuleiten. Als
+Informationsgrundlage dient die Aufgabenbeschreibung oder die Spezifikation eines Programms
+und die Eingabebeschränkungen, die definiert welche Parameter als Input für das Programm erlaubt sind.
 
+Abbildung~\ref{fig:architektur} stellt den technischen Aufbau der Anwendungen dar und verdeutlicht wie die verschiedenen Softwarekomponenten zusammenhängen.
 
-\subsection{Systemablauf und Architektur}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{assets/architektur.png}
+    \caption{Architektur der Webanwendung}
+    \label{fig:architektur}
+\end{figure}
 
+Technisch besteht die Anwendung aus einem mit Python und dem Framework FastAPI realisierten Backend sowie einer mit HTML, CSS und JavaScript umgesetzten 
+Benutzeroberfläche. Beide Bestandteile werden gemeinsam innerhalb eines Serverprozesses betrieben. Über die Route GET / stellt das Backend die statischen 
+Dateien der Benutzeroberfläche bereit und liefert sie an den Browser aus.
 
-\subsection{Auswahl der Programmieraufgaben sowie der Referenz- und Fehlerimplementierungen}
+Die Benutzeroberfläche ermöglicht die Eingabe einer natürlichsprachlichen Programmieraufgabe und sendet diese anschließend über eine HTTP-POST-Anfrage an 
+den Endpunkt POST /api. Dort befindet sich die serverseitige Logik zur Verarbeitung der Anfrage und zur Generierung der Testfälle. Der Endpunkt übermittelt 
+die aufbereitete Aufgabenbeschreibung an das verwendete Large Language Model und gibt dessen Antwort anschließend an die Benutzeroberfläche im Browser zurück, wo die 
+generierten Testfälle dargestellt werden.
 
-\subsection{Aufbau des Generierungs-Prompts}
+\newpage
+Abbildung~\ref{fig:systemablauf} beschreibt wiederum den internen prozeduralen Ablauf der Anwendung.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{assets/systemablauf.png}
+    \caption{Systemablauf innerhalb der Webanwendung}
+    \label{fig:systemablauf}
+\end{figure}
+
+Der Prozess kann aufgelistet dargestellt werden als, 
+\begin{itemize}
+    \item die Eingabe einer Programmieraufgabe über eine Weboberfläche,
+    \item die client- und serverseitige Prüfung der Eingabe,
+    \item die Übermittlung der Aufgabenbeschreibung als JSON an den Endpunkt
+          \texttt{POST /api},
+    \item die Ergänzung der Eingabe um einen serverseitig hinterlegten
+          System-Prompt,
+    \item der asynchronen Aufruf der OpenAI API über das offizielle
+          Python-SDK,
+    \item die Rückgabe der Modellantwort in einem einheitlichen
+          JSON-Response-Modell,
+    \item die kompakte Darstellung des Ergebnisses in der Weboberfläche.
+\end{itemize}
+
+\subsection{Aufbau des System-Prompts}
+Um dem LLM mehr Kontext und klare Guidlines zu geben, wird jeder Anfrage ein einheitlicher und vorab festgelegter System-Prompt beigefügt.
+Dieser System-Prompt stellt die einzige Möglichkeit dar, indirekt Einfluss auf die Qulität der Ausgabe und somit auf die 
+Qualität der generierten Testfälle zu nehmen.
+Die von Nutzer eingegebenen konkrete Aufgabenbeschreibung wird davon getrennt als Benutzernachricht
+übermittelt. Diese Trennung verhindert, dass Instruktionen zur Rolle des LLM's, zum
+Ausgabeformat und zu den Qualitätsanforderungen bei jeder Anfrage erneut durch
+die Benutzeroberfläche bereitgestellt werden müssen. Gleichzeitig sorgt sie
+für ein einheitliches experimentelles Vorgehen, da alle Aufgaben unter
+denselben Prompt-Bedingungen verarbeitet werden.
+
+Der System-Prompt setzt sich konzeptionell aus fünf Bestandteilen zusammen:
+
+\begin{enumerate}
+    \item \textbf{Rollenbeschreibung:} Das Modell wird als Assistenzsystem zur
+          Generierung von Black-Box-Testfällen aus natürlichsprachlichen
+          Programmieraufgaben definiert. Dadurch wird die Aufgabe des Modells
+          gegenüber einer allgemeinen Codegenerierung abgegrenzt.
+    \item \textbf{Generierungsziel:} Für die übergebene Aufgabe sollen genau
+          15 Testfälle einschließlich des jeweils erwarteten korrekten Outputs
+          erzeugt werden. Die feste Anzahl ermöglicht eine vergleichbare
+          Auswertung über mehrere Aufgaben hinweg.
+    \item \textbf{Abdeckungsanforderung:} Das Modell wird angewiesen, typische
+          Fehler und Randfälle zu berücksichtigen. Die Testfälle sollen so
+          gewählt werden, dass fehlerhafte Implementierungen möglichst
+          erkannt werden. Damit wird neben gewöhnlichen Eingaben insbesondere
+          die Edge-Case-Abdeckung adressiert.
+    \item \textbf{Gültigkeitsbedingungen:} Alle in der Aufgabenbeschreibung
+          genannten Constraints sind zwingend einzuhalten. Eingabewerte
+          außerhalb der erlaubten Bereiche sind ausgeschlossen. Bereits in der
+          Aufgabe enthaltene Beispieltestfälle dürfen nicht erneut verwendet
+          werden. Diese Vorgaben sollen sowohl unzulässige Eingaben als auch
+          eine künstliche Verbesserung der Abdeckung durch kopierte Beispiele
+          vermeiden.
+    \item \textbf{Ausgabevertrag:} Die Antwort muss ausschließlich aus einem
+          gültigen JSON-Objekt bestehen. Jeder Testfall enthält die für die
+          jeweilige Funktionssignatur erforderlichen Eingabevariablen und das
+          Feld \texttt{expected}. Markdown-Codeblöcke und zusätzliche
+          Erläuterungen außerhalb des JSON-Objekts sind untersagt.
+\end{enumerate}
+
+Der Prompt gibt ein abstraktes JSON-Schema mit den Schlüsseln
+\texttt{test1}, \texttt{test2} und so weiter vor. Die Eingabevariablen werden
+nicht fest benannt, da die untersuchten Programmieraufgaben unterschiedliche
+Funktionssignaturen besitzen. Stattdessen wird das Modell explizit
+aufgefordert, Namen und Anzahl der Variablen an die konkrete Aufgabe
+anzupassen. So kann dasselbe Ausgabeprinzip beispielsweise skalare Werte,
+Zeichenketten, Listen oder verschachtelte Listen abbilden.
+
+Die Vorgabe eines reinen JSON-Formats erfüllt zwei Zwecke. Erstens wird die
+Antwort in der Benutzeroberfläche konsistent und kompakt dargestellt.
+Zweitens kann sie ohne manuelle Umformung von der im Projekt verwendeten
+Testsimulation eingelesen werden. Das Feld \texttt{expected} bildet dabei die
+Grundlage für den späteren Vergleich zwischen dem vom Modell vorhergesagten
+Sollwert und dem tatsächlichen Ergebnis einer Implementierung.
+
+Trotz der präzisen Vorgaben stellt der Prompt keine formale Garantie für
+gültiges JSON, eingehaltene Constraints oder fachlich korrekte Sollwerte dar.
+Ein Sprachmodell erzeugt seine Antwort probabilistisch und führt die
+beschriebene Funktion nicht zwangsläufig aus. Aus diesem Grund werden die
+generierten Testfälle in der anschließenden Evaluation zunächst mit einer
+korrekten Referenzimplementierung validiert. Erst nach dem Ausschluss
+unzulässiger Eingaben und fehlerhafter Sollwerte wird beurteilt, ob die
+verbleibenden Testfälle bewusst fehlerhafte Implementierungen erkennen. Die
+Promptgestaltung und die nachgelagerte Validierung ergänzen sich somit: Der
+Prompt reduziert vermeidbare Format- und Gültigkeitsfehler, während die
+experimentelle Prüfung verbleibende fachliche Abweichungen sichtbar macht.
 
 \newpage

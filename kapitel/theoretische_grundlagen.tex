@@ -19,14 +19,6 @@ Durch beide Testverfahren können zwar Fehler erkannt werden, jedoch kann grunds
 dass ein Programm vollständig fehlerfrei ist. Selbst bei kleineren Eingabebereichen ist die Anzahl an verschiedenen Eingabekombinationen bereits so groß, dass eine vollständige 
 Prüfung nicht praktikabel oder gar unmöglich ist.
 
-Diese Projektarbeit baut wesentlich auf dem Konzept des Black-Box-Testings auf. Vor dem Hintergrund, dass Large Language Models zunehmend zur Generierung von Quellcode 
-eingesetzt werden, liegt es nahe, sie zugleich auch Tests und Testfälle für den erzeugten Code erstellen zu lassen. Dabei entsteht jedoch ein methodisches Risiko.
-Hat das Modell die spezifizierte Funktionalität bereits im Code falsch umgesetzt, kann nicht ausgeschlossen werden, dass es anschließend Testfälle mit erwarteten 
-Ergebnissen generiert, die auf derselben Fehlinterpretation beruhen. In diesem Fall würden die Tests nicht das ursprünglich geforderte Verhalten prüfen, sondern lediglich 
-bestätigen, dass der erzeugte Code konsistent mit der eigenen, möglicherweise fehlerhaften Auslegung der Aufgabe arbeitet. Vor diesem Hintergrund erscheint es besonders 
-relevant zu untersuchen, wie zuverlässig ein Large Language Model Testfälle ausschließlich aus der natürlichsprachlichen Spezifikation ableiten kann, ohne Zugriff auf die 
-konkrete Implementierung zu erhalten.
-
 Gerade beim Black-Box-Testing hängt
 die Qualität eines Testprozesse maßgeblich von der Auswahl geeigneter Testfälle ab. Nach der Definition des International Software Testing Qualifications Board 
 besteht ein Testfall primär aus Vorbedingungen, Eingaben, gegebenenfalls auszuführende Aktionen, erwartete Ergebnisse und 
@@ -36,16 +28,50 @@ Rückgabewerte definiert, besteht ein Testfall immer aus einer konkreten Eingabe
 das gemäß Spezifikation bei den jeweiligen Testfällen eintreten soll (ISTQB). Bei der Testdurchführung wird das erwartete Ergebnis mit dem tatsächlichen Ergebnis der Implementierung 
 verglichen.
 
-Für diese Untersuchung ist diese Zweitligkeit eines Testfalls in Eingabe und erwarteten Ergebnis
-besonders relevant, da beide Angaben von dem verwendeten Large Language Model auf Basis einer natürlich sprachlichen Programmieraufgabe (Spezifikation des Soll-Verahltens) 
-erzeugt werden. Die Korrektheit des von der KI erwarteten Ergebnis hängt davon ab, wie gut das Modell die Programmieraufgabe verstanden hat und wie gut es damit 
+
+\subsection{KI-gestützte Testfallgenerierung und Large Language Models}
+Diese Projektarbeit baut wesentlich auf dem Konzept des Black-Box-Testings auf. Vor dem Hintergrund, dass Large Language Models zunehmend zur Generierung von Quellcode 
+eingesetzt werden, liegt es nahe, sie zugleich auch Tests und Testfälle für den erzeugten Code erstellen zu lassen. Dabei entsteht jedoch ein methodisches Risiko.
+Hat das Modell die spezifizierte Funktionalität bereits im Code falsch umgesetzt, kann nicht ausgeschlossen werden, dass es anschließend Testfälle mit erwarteten 
+Ergebnissen generiert, die auf derselben Fehlinterpretation beruhen. In diesem Fall würden die Tests nicht das ursprünglich geforderte Verhalten prüfen, sondern lediglich 
+bestätigen, dass der erzeugte Code konsistent mit der eigenen, möglicherweise fehlerhaften Auslegung der Aufgabe arbeitet. Vor diesem Hintergrund erscheint es besonders 
+relevant zu untersuchen, wie zuverlässig ein Large Language Model Testfälle ausschließlich aus der natürlichsprachlichen Spezifikation ableiten kann, ohne Zugriff auf die 
+konkrete Implementierung zu erhalten.
+
+Gerade aus diesem Grund ist für diese Untersuchung die Zweitligkeit eines Testfalls, bestehent aus Eingabe und erwarteten Ergebnis
+besonders relevant. Beide Angaben werden von dem verwendeten Large Language Model auf Basis einer natürlich sprachlichen Programmieraufgabe (Spezifikation des Soll-Verahltens) 
+erzeugt. Die Korrektheit des von der KI erwarteten Ergebnis hängt davon ab, wie gut das Modell die Programmieraufgabe verstanden hat und wie gut es damit 
 in der Lage war das Soll-Ergebnis der eigenen Testfälle vorherzusagen.
-In dieser Projektarbeit wird ein KI-generierter Testfall demnach erst als valide eingestuft, wenn die Eingabe den jeweiligen Einschränkungen innerhalb der Programmieraufgabe 
-entspricht und das von der KI erwartete Ergebnis mit dem Ergebnis der korrkten Referenzimplementierung übereinstimmt. Erst dann kann untersucht werden ob die Gruppe an Testfällen 
-auch bewusst fehlerhafte Implementierungen identifizieren kann.
+Ein KI-generierter Testfall wird demnach erst als valide eingestuft, wenn die Eingabe den jeweiligen Einschränkungen innerhalb der Programmieraufgabe 
+entspricht und das von der KI erwartete Ergebnis mit dem Ergebnis der korrkten Referenzimplementierung übereinstimmt. Erst dann kann untersucht werden ob die Gruppe der 
+validierten Testfällen auch dazu geeignet ist, bewusst fehlerhafte Implementierungen identifizieren.
 
+Um einordnen zu können, weshalb ein Large Language Model sowohl geeignete Testfälle als auch fehlerhafte erwartete Ergebnisse erzeugen kann, ist zunächst ein grundlegendes 
+Verständnis seiner Funktionsweise erforderlich. 
 
-\subsection{Large Language Models und KI-gestützte Testfallgenerierung}
-It is measured to be labour intensive and expensive, which accounts for > 50 \% of the total cost of software development. (Nidhra 2012)
+Moderne Large Language Models basieren überwiegend auf dem in 2017 von Ashish Vaswani und Kollegen veröffentlichten Konzept der Transorfmer Architektur. Hierbei ermöglichen 
+sogenannte Attention-Mechanismen unterschiedliche Stellen in einer sprachlichen Sequenz miteinander in Beziehung zu setzen. Auf dieses Projekt bezogen, können somit
+Zusammenhänge zwischen den Bedingungen einer natürlich sprachlichen Programmieraufgaben, den darin definierten Eingabegrenzen und dem geforderten Rückgabewert modelliert 
+und als Kontext während der Generierung der Antwort verwendet werden.
+
+Die Ausgabe eines LLM's wird schrittweise in sogenannten Tokens erzeugt. Tokens stellen abhängig von der verwendeten Tokenisierung vollständige Wörter oder Wordteile dar. 
+Auf Basis der Eingabe und der bereits generierten Tokens berechnet das Modell eine Wahrscheinlichkeitsverteilung für das jeweils nächste Token. Die Ausgabe eines generativen 
+Sprachmodells stellt folglich keine bewiesen richtigen Fakten dar. Das Modell generiert eine sprachlich und strukturell wahrscheinliche Fortsetzung der bisher verarbeiteten 
+Tokens und dem gesammelten Kontext. Bezogen auf die Generierung von Testfällen erklärt dieses Verhalten, warum das Modell die Bedingungen und Vorgaben innerhalb einer 
+Programmieraufgaben zwar in Verbindung setzen und als Kontext in die Ausgabe mit einfließen lassen kann, es jedoch nicht garantiert ist, dass die Ausgabe alle Vorgaben befolgt 
+und fachlich korrekt ist.  
+
+Für die Umsetzung des zu dieser dieser Projektarbeit zugehörigen Assistenzsystems wird das von OpenAI bereitgestellte Modell GPT-4.1 mini verwendet. Das Modell stellt eine 
+kleinere und schnellere Varainte von GPT-4.1 dar und eignet sich insbesondere für das Befolgen von Anweisungen und den Einsatz in API-basierten Anwendungen. Die Wahl dieses 
+Modells beruht auf einem Kompromiss zwischen Leistungsfähigkeit, Antwortgeschwindigkeit und Nutzungskosten. Im Assistenzsystems muss das Modell eine natürlich sprachliche 
+Programmieraufgabe und einen Systemprompt verstehen und interpretieren, daraufhin eine festgelegte Anzahl an möglichst geeigneten Testfällen generieren und zu jedem Testfall 
+einen erwarteten Rückgabewert bestimmen. Das Verwenden eines kleineren Modells ermöglicht es diese sich wiederholenden API-Anfragen mit begrenzten technischen und finanziellen 
+Aufwand durchzuführen.
+
+Die Auswahl eines Mini-Modells ist zudem bei der Auswertung und Interpretation der Ergebnisse zu beachten. Die Untersuchung zielt nicht darauf ab die generell bestmögliche Testqualität 
+eines aktuellen Sprachmodells zu erzielen. Vielmehr wird untersucht, welche Qualität mittels eines schnell verfügbaren und Kosteneffizienten Modells erreicht werden kann. 
+Die Ergebnisse dieser Arbeit beziehen sich folglich nur auf das ausgewählte Modell und den verwendeten Systemprompt. Ein Vergleich mit besseren oder anders trainierten Modellen 
+wäre Gegenstand einer möglichen weiteren Untersuchung, ist aber nicht Teil dieser Projektarbeit.
+
 \newpage
 
