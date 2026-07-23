@@ -1,8 +1,187 @@
 \section{Evaluationsmethode und Ergebnisse}
 
 \subsection{Auswahl der Programmieraufgaben sowie der Referenz- und Fehlerimplementierungen}
+Die Programmieraufgaben stammen von der Coding-Challenge-Plattform Leetcode. Leetcode ist eine öffentliche Website auf der das Lösen verschiedener algorithmischer Programmieraufgaben mit unterschiedlichen 
+Verfahren und Datenstrukturen geübt werden kann. Mit der Auswahl der Programmieraufgaben wurde versucht ein breites Spektrum an unterschiedlichen Problemarten und möglichen 
+Sonderfällen abzudecken. Es wurden insgesamt sieben Probleme für die Evaluation des Assistentsystems ausgewählt:
+\begin{enumerate}
+    \item \textbf{Binary Number with Alternating Bits:} Die Binärdarstellung einer Positiven Ganzzahl soll darauf geprüft werden, 
+    ob sich benachbarte Bits überall unterscheiden. Algorithmisch muss die Bitfolge von rechts nach links durchgegangen werden um jedes Bit 
+    mit seinem direkten Nachbarn zu vergleichen. 
+    \item \textbf{Sort Vowels by Frequency:} Innerhalb einer Zeichenkette sollen ausschließlich die Vokale nach absteigender Häufigkeit umsortiert werden. Alle Konsonanten 
+    sollen ihre ursprüngliche Postition beibehalten. Algorithmisch besteht die Herausforderung darin, dass die Vokalhäufigkeiten und die intiale Ordnung der Vokale bestimmt 
+    werden muss, woraufhin eine sortierte Vokalfolge erstellt werden kann um diese auf die ursprüngliche Zeichenkette anzuwenden.
+    \item \textbf{Rotate List:} Eine verkette Liste soll um eine vorgegebene Anzahl an Postitionen (k) nach nach rechts verschoben werden. Das Verschieben der einzelnen 
+    Knoten wird durch das Verbinden der verketten Liste und das Trennen an einer anderen Stelle abgebildet.
+    \item \textbf{Finding Highest Altitude:} Die Aufgabe beschreibt eine Autofahrt welche auf Höhe 0 beginnt. Ein Array beinhaltet die relativen Höhenänderungen zwischen 
+    aufeinanderfolgenden Punkten. Gesucht wird die absolut höchste Stelle, was algorithmisch der Bestimmung der höchsten Präfixsumme entspricht. 
+    \item \textbf{Minimum Bit Flips to make a OR b equal to c:} Für drei positive Ganzzahlen (a, b, c) größer Null soll die minimale Anzahl an Bitänderungen in a und b ermittelt 
+    werden, sodass ihr bitweises logisches Oder dem Wert c entspricht. Das Problem kann gelöst werden, indem Bit für Bit geprüft wird, ob ein Bit gesetzt oder gelöscht werden muss 
+    und ob eine oder zwei Änderungen dafür erforderlich sind.
+    \item \textbf{Sort colors:} Ein Array aus den Werten 0, 1 und 2, welche die Farben rot, weiß und blau representieren, soll ohne die Verwendung von Bibliotheksfunktionen 
+    in-place in aufsteigende Reihenfolge sortiert werden.     
+    \item \textbf{Max Number of K-Sum Pairs:} Aus einem Zahlenarray sollen möglichst viele Paare gefunden und entfernt werden, deren Summe einem vorgegebenen Wert k entspricht. 
+    Die algorithmische Herausforderung besteht darin, passende Komplementwerte unter Berücksichtigung ihrer Häufigkeiten zuzuordnen, sodass jedes Element höchstens einmal 
+    verwendet wird.
+\end{enumerate}
 
-\subsection{Validitätsrate}
+Bei den kurzen Erläuterungen handelt es sich nicht um die später an die KI weitergegebenen Aufgabenstellungen, diese können dem ANHANG entnommen werden.
+
+Die korrekten Referenzimplementierungen sowie die falschen Lösungen zu den aufgeführten Programmieraufgaben stammen aus eigener Entwicklung. Die Referenzimplementierungen 
+wurden auf der Leetcode-Plattform eingereicht und gegenüber der dort vorhandenen Testsuite validiert. Dadurch liegt für jede Programmieraufgabe eine geprüft korrekte Lösung vor, 
+die im weiteren Verlauf dieser Untersuchung als Vergleichsgrundlage für die Validierung der KI-generierten erwarteten Ergebnisse dient. 
+
+Die hier als bewusst fehlerhaft verwendeten Lösungen basieren ebenfalls auf eigenen früheren Lösungsversuchen zu den jeweiligen Problemen. Für die Untersuchung ist das 
+vorteilhaft, da es sich nicht um künstlich konstruierte oder absichtlich eingebaute Fehler, sondern um tatsächilche, während des menschlichen Problemlösungsprozesses 
+enstandene Implementierungsfehler handelt. Diese falschen Lösungsversuche liefern für viele typische Testfälle das korrekte Ergebnis, scheitern jedoch an spezifischen Grenz- 
+oder Sonderfällen. Dadurch eignen sie sich besonders dafür zu überpfrüfen wie gut die KI-generierten Testfälle fehlerhafte Implementierungen entlarven. 
+
+Die korrekten und fehlerhaften Implementierungen, sowie eine Erklärung warum die jeweilige fehlerhafte Lösung falsch ist, befinden sich ebenfalls im ANHANG.
+
+
+
+\subsection{Validität der generierten Testfälle}
+Ein generierter Testfall kann aus zwei verschiedenen Gründen nicht valide sein. Seine Eingabewerte können außerhalb der in der
+Programmieraufgabe definierten Constraints liegen oder der vom Sprachmodell
+erzeugte erwartete Sollwert kann falsch sein. In beiden Fällen ist ein Fehlverhalten einer 
+Implementierung nicht interpretierbar, wodurch der Testfall unbrauchbar wird. Die
+Validitätsprüfung bildet deshalb eine notwendige Vorstufe für die darauf folgende
+Untersuchung zur Fehler- und Edge-Case-Abdeckung.
+
+\subsubsection{Bewertungsverfahren}
+Zu jede der sieben Programmieraufgabe wurden 15 Testfälle durch das Assistentsystem generiert. 
+Insgesamt kommt die Untersuchung somit auf 105 Testfälle.
+Anschließend wurde zu jeder Aufgabe die korrekte Referenzimplementierung mit den 15 generierten Testfällen ausgeführt.
+
+Das daraus resultierende Ergebnis wurde anschließend mit dem von der KI erwarteten Ergebnis verglichen. Der im Ergebnisdatensatz (im ANHANG)
+im Feld \texttt{matches-}\allowbreak\texttt{expected} gespeicherte Wert gibt an, ob beide Ergebnisse übereinstimmen
+
+Da ein Testfall auf zwei verschieden Arten nicht valide sein kann erfolgte die Validitätsprüfung innerhalb des Ergebnisdatensatzes in zwei 
+Schritten:
+
+\begin{enumerate}
+    \item Zunächst wurde geprüft, ob sämtliche Eingabewerte eines Testfalls
+          innerhalb der in der Aufgabenbeschreibung genannten Constraints
+          liegen. Testfälle außerhalb dieser Beschränkung wurden als
+          unzulässig markiert.
+    \item Für die verbleibenden zulässigen Testfälle wurde geprüft, ob der
+          von der KI erwartete Sollwert mit dem Ergebnis der Referenzimplementierung
+          übereinstimmt. Eine Abweichung wurde als Sollwertfehler gewertet.
+\end{enumerate}
+
+Die daraus resultierende Sollwertvalidität wurde wie folgt berechnet:
+
+\[
+Sollwertvaliditaet =
+\frac{N_{\mathrm{zulaessig-und-korrekt}}}{N_{\mathrm{zulaessig}}} \cdot 100
+\]
+
+Dabei bezeichnet \(N_{\mathrm{zulaessig}}\) die Anzahl der
+constraint-konformen Testfälle und \linebreak \(N_{\mathrm{zulaessig-und-korrekt}}\) die Menge aller zulässigen
+Testfälle, deren Sollwert durch die Referenzimplementierung bestätigt wurde.
+Ergänzend wurde die Gesamtquote unmittelbar nutzbarer Testfälle berechnet.
+Sie bildet das Verhältnis der Testfälle, die gleichzeitig zulässig sind und einen korrekten
+Sollwert besitzen, gegenüber allen generierten Testfällen ab.
+
+\[
+Gesamtquote =
+\frac{N_{\mathrm{zulaessig-und-korrekt}}}{N_{\mathrm{gesamt}}} \cdot 100
+\]
+
+\subsubsection{Ergebnisse}
+Bei der manuelle Constraint-Prüfung konnten insgesamt zehn unzulässige
+Testfälle identifiziert werden. Ddavon entfielen zwei auf Problem 1 und die restlichen 
+acht auf Problem 5. Bei Problem 1 wurde mit \(n=2\,863\,311\,530\) ein Wert außerhalb des
+erlaubten Bereichs \(1 \leq n \leq 2^{31}-1\) (2\,147\,483\,647) erzeugt. Bei Problem 5
+enthielten acht Testfälle mindestens einen Eingabewert 0, obwohl für alle drei
+Eingabevariablen positive Werte zwischen 1 und \(10^9\) durch die Beschränkungen 
+innerhalb der Aufgabenstellung vorgeschrieben waren.
+Damit erfüllten 95 von 105 Eingaben die in den Aufgaben gesetzten Eingabebeschränkungen
+(Constraint-Konformitätsrate = \(90{,}5\,\%\)).
+
+Unter den 95 zulässigen Testfällen wurden 86 Sollwerte durch die
+Referenzimplementierungen bestätigt. Neun zulässige Testfälle enthielten
+einen falschen Sollwert. Daraus ergibt sich eine Sollwertvalidität von
+
+\[
+\frac{86}{95} \cdot 100 = 90{,}5\,\%.
+\]
+
+Bezogen auf alle 105 generierten Testfälle ergibt sich eine
+Gesamtquote an unmittelbar nutzbaren Testfällen von
+
+\[
+\frac{86}{105} \cdot 100 \approx 81{,}9\,\%.
+\]
+
+Die Ergebnisse aus der Auswertung der einzelnen Aufgaben sind in
+Tabelle~\ref{tab:validitaet-probleme} zusammengefasst.
+
+\begin{table}[htbp]
+    \centering
+    \caption{Validität der generierten Testfälle nach Aufgabe}
+    \label{tab:validitaet-probleme}
+    \begin{tabular}{lrrrr}
+        \hline
+        Aufgabe & Erzeugt & Zulässig & Korrekt & Sollwertfehler \\
+        \hline
+        Problem 1 & 15 & 13 & 13 & 0 \\
+        Problem 2 & 15 & 15 & 7  & 8 \\
+        Problem 3 & 15 & 15 & 14 & 1 \\
+        Problem 4 & 15 & 15 & 15 & 0 \\
+        Problem 5 & 15 & 7  & 7  & 0 \\
+        Problem 6 & 15 & 15 & 15 & 0 \\
+        Problem 7 & 15 & 15 & 15 & 0 \\
+        \hline
+        Gesamt    & 105 & 95 & 86 & 9 \\
+        \hline
+    \end{tabular}
+\end{table}
+
+Die Sollwertfehler konzentrieren sich vollständig auf zwei Aufgaben. Bei
+Problem 2, der Sortierung von Vokalen nach Häufigkeit und Erstauftreten,
+waren acht der 15 erwarteten Ausgaben falsch. Obwohl sämtliche Eingaben die
+Constraints erfüllten, erreichte diese Aufgabe somit nur eine
+Sollwertvalidität von \(46{,}7\,\%\). 
+
+Bei Problem 3, der Rotation einer verketteten Liste, trat ein einzelner
+Sollwertfehler in Testfall 12 auf. Die übrigen 14 zulässigen Testfälle
+wurden korrekt berechnet, was einer Validitätsrate von \(93{,}3\,\%\)
+entspricht. Für alle anderen Probleme erreichten die von der KI generierten Testfälle nach Entfernung
+unzulässiger Eingaben eine Sollwertvalidität von \(100\,\%\).
+
+\subsubsection{Interpretation}
+Aus den Ergebnissen der Validitätsprüfung lassen sich erste interessante Schlüsse ziehen.
+Auffällig ist das bei den ausgewählten Aufgaben scheinbar kein Zusammenhang zwischen der 
+Constraint-Konformitätsrate und der Sollwertvaliditätsrate besteht. Bei Problem 5 lag die 
+Constraint-Konformitätsrate mit \(46{,}7\,\%\) deutlich unter dem Durchschnitt, die Sollwertvaliditätsrate 
+der generierten Testfälle zu diesem Problem lag jedoch bei \(100\,\%\). 
+Andersrum lag die Constraint-Konformitätsrate bei Problem 2 bei \(100\,\%\) und die Sollwertvaliditätsrate 
+nur bei \(46{,}7\,\%\). Die Untersuchung deutet folglich darauf hin, dass eine geringe Constraint-Konformitätsrate 
+nicht zwangsläufig eine geringe Sollwertvaliditätsrate impliziert und umgekehrt.
+
+Insbesondere die 8 falsch erzeugten Testfälle für Problem 5 scheinen bezüglich der Constraint-Konformität bemerkenswert. 
+Trotz eines klar begrenzten Wertebereiches von 1 bis \(10^9\), enthielten über der Hälfte der generierten Testfälle den Wert 0. 
+Dieses Muster könnte darauf zurückzuführen sein, dass der Wert 0 häufig bei der Bildung von Grenz- und Sonderfällen Anwendung findet. 
+In diesem Fall wurde das Grenzfallmuster jedoch fehlerhaft auf eine Aufagabe angewandt, deren Aufgabenbeschreibung diesen Fall eindeutig 
+und explizit ausschließt.
+
+Die Analyse der Sollwertfehler ergibt eine starke Konzentration der fehlerhaften Erwartungswerte auf Problem 2, 
+welche gegen eine rein zufällige Verteilung spricht. 
+Die Validität scheint von der komplexität der semantischen Anforderungen der jeweiligen Aufgabe
+abzuhängen. Damit ist die Schwierigkeit gemeint, die in der Aufgabenbeschreibung formulierten Regeln korrekt 
+zu interpretieren und in ihrer Kombination auf einen konkreten Eingabefall anzuwenden.
+Einfache bitweise, kumulative oder partitionierende Operationen wurden in der Stichprobe zuverlässig behandelt, während die
+mehrstufige Sortierregel mit positionsabhängiger Tie-Break-Bedingung in Problem 2 deutlich häufiger zu falschen Erwartungen führte. 
+Maßgeblich für die Sollwertvalidität scheint somit nicht die die rechnerische Schwierigkeit einer Aufgabe zu sein sondern die Anzahl, 
+Abhängigkeit und sprachliche Eindeutigkeit der anzuwendenden Regeln.
+
+Der einzelne Sollwertfehler bei Problem 3 ist insofern interessant, da bei vergleichbaren Testfällen zu selbiger Aufgabe keine fehlerhaften Werte für das erwartete 
+Ergebnis auftraten. 
+Aus der Untersuchung lässt sich hierfür keine eindeutige Ursache ableiten. Am ehesten kann der Fehler daher als Veranschaulichung der zuvor beschriebenen Funktionsweise 
+von Large Language Models interpretiert werden. Die erzeugte Tokenfolge basiert auf Wahrscheinlichkeitsverteilungen und nicht auf einer garantierten logischen Herleitung. 
+Dadurch können auch bei ähnlichen Eingaben vereinzelt fehlerhafte Ausgaben entstehen.
+
 
 
 \subsection{Erkennung von fehlerhaften Implementierungen}

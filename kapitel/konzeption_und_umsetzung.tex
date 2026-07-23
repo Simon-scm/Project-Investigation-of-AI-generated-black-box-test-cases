@@ -55,7 +55,7 @@ Der Prozess kann aufgelistet dargestellt werden als,
 Um dem LLM mehr Kontext und klare Guidlines zu geben, wird jeder Anfrage ein einheitlicher und vorab festgelegter System-Prompt beigefügt.
 Dieser System-Prompt stellt eine entscheidende Möglichkeit dar, indirekt Einfluss auf die Qulität der Ausgabe und somit auf die 
 Qualität der generierten Testfälle zu nehmen.
-Die von Nutzer eingegebenen konkrete Aufgabenbeschreibung wird davon getrennt als Benutzernachricht
+Die vom Nutzer eingegebene konkrete Aufgabenbeschreibung wird davon getrennt als Benutzernachricht
 übermittelt. Diese Trennung verhindert, dass Instruktionen zur Rolle des LLM's, zum
 Ausgabeformat und zu den Qualitätsanforderungen bei jeder Anfrage erneut durch
 die Benutzeroberfläche bereitgestellt werden müssen. Gleichzeitig sorgt sie
@@ -90,6 +90,8 @@ Der System-Prompt setzt sich konzeptionell aus fünf Bestandteilen zusammen:
           jeweilige Funktionssignatur erforderlichen Eingabevariablen und das
           Feld \texttt{expected}, welches das vom Modell erwartete Ergebnis speichert.
 \end{enumerate}
+
+Der ganzheitliche System-Prompt kann dem ANHANG entnommen werden.
 
 Das vorgegebene JSON-Ausgabeformat wurde gewählt um die
 Antwort in der Benutzeroberfläche konsistent und kompakt darstellbar zu machen und
