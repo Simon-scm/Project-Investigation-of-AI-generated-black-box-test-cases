@@ -1,1 +1,28 @@
 \section{Fazit}
+Die Untersuchung zeigt, dass Large Language Models aus natürlichsprachlichen
+Programmieraufgaben grundsätzlich geeignete Black-Box-Testfälle ableiten können. 
+Auf Basis der Analyse kann die Forschungsfrage damit dahingehend beantwortet werden, 
+dass ein LLM die Testfallerstellung wirksam unterstützen kann, die erzeugten Ergebnisse 
+jedoch nicht ungeprüft übernommen werden sollten.
+
+Bei der Nutzung der entwickelten Anwendung sollte eine möglichst eindeutige
+Aufgabenbeschreibung mit allen Eingabegrenzen und dem erwarteten Rückgabeformat übergeben
+werden. Anschließend sind die generierten Eingaben auf Einhaltung der Constraints und die
+Sollwerte anhand der Spezifikation oder einer vertrauenswürdigen Referenzimplementierung zu
+prüfen. Erst die validierten Testfälle sollten gegen die zu untersuchende Implementierung
+ausgeführt werden. Die Anwendung ist somit als unterstützendes Werkzeug zur Erweiterung einer
+Testsammlung zu verstehen und nicht als Ersatz für eine fachliche Kontrolle.
+
+Für weiterführende Untersuchungen könnte das Experiment mit mehr Programmieraufgaben, mehreren
+falschen Lösungen pro Aufgabe und wiederholten Generierungsdurchläufen durchgeführt werden.
+Zusätzlich könnten unterschiedliche Modelle und Promptvarianten verglichen werden. Außerdem 
+wäre es hilfreich das LLM zu jeder Testfallgenerierung eine kurze Argumentation asugeben zu lassen, 
+um dessen Vorgehen nachvollziehbarer zu machen. Mittels dieser Erweiterungen könnten tiefere Einglicke 
+in mögliche Zusammenhänge zwischen Validits- und Fehlererkunngsrate gewonnen und potentiell 
+weitere Einflussfaktoren identifiziert werden.
+
+Es ist anzunehmen das dabei die Unabhängigkeit zwischen Code- und Testfallgenerierung von besonderer Bedeutung bleibt. 
+Wir das selbe Modell für beide Prozesse eingesetzt, könnten sich Fehlinterpretationen in Code und
+Tests wiederholen und gegenseitig bestätigen. In zukünftigen Systemen oder Prozessen sollten Testfälle deshalb in
+einem getrennten Kontext, ohne Zugriff auf konkrete Implementierungen und gegebenenfalls
+durch ein unabhängiges Modell erzeugt und geprüft werden.
