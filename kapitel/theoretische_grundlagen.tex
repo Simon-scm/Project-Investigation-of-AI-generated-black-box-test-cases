@@ -9,8 +9,7 @@ Allgemeiner formuliert besteht das Ziel von Software-Testing darin,
 Abweichungen zwischen dem spezifizierten und dem tatsächlichen Verhalten eines Systems zu 
 identifizieren. Programme werden also unter festgelegten Bedingungen ausgeführt, wodurch 
 geprüft werden kann, ob die vorab definierten Anforderungen erfüllt werden oder ob Fehler 
-auftreten. Zum typischen Testprozess gehören unter anderem die Testplanung, die Vorbereitung von
-Testfällen, deren Ausführung sowie die Auswertung der Ergebnisse (Wang et al., 2024, PDF-S. 3).
+auftreten.
 
 Konzeptionell lassen sich die verschiedene Arten und Techniken zum testen von Software in zwei Kategorien 
 einteilen, dem White-Box-Testing und dem Black-Box-Testing (Nidhra 2012). Für das White-Box-Testing benötigt 
@@ -24,28 +23,22 @@ Ohne Wissen über die internen Abläufe werden Testfälle und erwartete Ergebnis
 oder Beschreibungen über das gewünschte Verhalten eines Programms abgeleitet (Verma 2017). Auf Basis dieser 
 Testfälle wird anschließend geprüft ob das Programm die definierte Funktionalität erfüllt.
 
-Durch beide Testverfahren können zwar Fehler erkannt werden, jedoch kann grundsätzlich nicht garantiert werden, 
-dass ein Programm vollständig fehlerfrei ist. Selbst bei kleineren Eingabebereichen ist die Anzahl an verschiedenen 
-Eingabekombinationen bereits so groß, dass eine vollständige Prüfung nicht praktikabel oder gar unmöglich ist.
-
 Gerade beim Black-Box-Testing hängt die Qualität eines Testprozesse maßgeblich von der Auswahl geeigneter Testfälle ab. 
 Nach der Definition des International Software Testing Qualifications Board besteht ein Testfall primär aus Vorbedingungen, 
 Eingaben, gegebenenfalls auszuführende Aktionen, erwartete Ergebnisse und Nachbedingungen (ISTQB). 
 Für die in dieser Projektarbeit betrachteten algorithmischen Programmieraufgabe lässt sich die allgemeine Definition 
-vereinfachen. Da jede Aufgabe festgelgte Parameter und Rückgabewerte definiert, besteht ein Testfall immer aus einer 
+vereinfachen. Jede Aufgabe defniert festgelgte Parameter und Rückgabewerte, somit besteht ein Testfall immer aus einer 
 konkreten Eingabe und dem dazugehörigen erwarteten Ergebnis. Das erwartete Ergebnis beschreibt das Verhalten, 
-das gemäß Spezifikation bei den jeweiligen Testfällen eintreten soll (ISTQB). Bei der Testdurchführung wird das 
-erwartete Ergebnis mit dem tatsächlichen Ergebnis der Implementierung erglichen.
+das gemäß Spezifikation bei den jeweiligen Testfällen eintreten soll (ISTQB).
 
 
 \subsection{KI-gestützte Testfallgenerierung}
 Diese Projektarbeit baut wesentlich auf dem Konzept des Black-Box-Testings auf. Vor dem Hintergrund, 
 dass Large Language Models zunehmend zur Generierung von Quellcode eingesetzt werden, liegt es nahe, 
 sie zugleich auch Tests und Testfälle erstellen zu lassen.
-So werden LLMs inzwischen auch für unterschiedliche Aufgaben des Software-Testings eingesetzt.
-Zu den häufig untersuchten Anwendungsfeldern zählen die Vorbereitung von
+So werden LLMs inzwischen auch für die Vorbereitung von
 Testfällen, die Erzeugung von Unit-Tests und Testorakeln sowie die Generierung von Eingaben für
-Systemtests (Wang et al., 2024, PDF-S. 1--2).
+Systemtests verwendet (Wang et al., 2024, PDF-S. 1--2).
 Dabei entsteht jedoch ein methodisches Risiko, wenn die Implementierung und Tests durch dasselbe 
 Modell erzeugt werden. Hat das Modell die spezifizierte Funktionalität bereits im Code falsch 
 umgesetzt, kann nicht ausgeschlossen werden, dass es anschließend Testfälle mit erwarteten 
@@ -67,10 +60,7 @@ Ein KI-generierter Testfall wird in dieser Arbeit demnach erst als valide einges
 Eingabe die jeweiligen Einschränkungen innerhalb der Programmieraufgabe erfüllt und das vom LLM 
 erwartete Ergebnis mit dem Ergebnis der korrkten Referenzimplementierung übereinstimmt. 
 Erst dann kann untersucht werden ob die Gruppe der validierten Testfällen auch dazu geeignet ist, 
-bewusst fehlerhafte Implementierungen identifizieren. Dieses Vorgehen entspricht der in
-Praxisstudien hervorgehobenen Notwendigkeit, LLM-generierte Testartefakte sorgfältig zu prüfen
-und menschliche Kontrolle insbesondere bei kritischen Tests beizubehalten
-(Santana et al., 2025, PDF-S. 1 und 5--6).
+bewusst fehlerhafte Implementierungen identifizieren.
 
 \subsection{Large Language Models: Funktionsweise und Auswahl}
 Um einordnen zu können, weshalb ein Large Language Model sowohl geeignete Testfälle als auch fehlerhafte erwartete 
@@ -100,10 +90,7 @@ Die Auswahl eines Mini-Modells ist bei der Auswertung und Interpretation der Erg
 Die Untersuchung zielt nicht darauf ab die generell bestmögliche Testqualität eines aktuellen Sprachmodells zu erzielen. 
 Vielmehr wird untersucht, welche Qualität mit der
 konkreten Kombination aus GPT-4.1 mini, System-Prompt bei den untersuchten Programmieraufgaben
-erreicht wird. Die Ergebnisse dieser Arbeit sind deshalb
-nicht ohne Weiteres auf andere Modelle oder Promptvarianten übertragbar.
-Ein Vergleich mit besseren oder anders trainierten Modellen wäre Gegenstand einer möglichen weiteren 
-Untersuchung, ist aber nicht Teil dieser Projektarbeit.
+erreicht wird.
 
 \newpage
 

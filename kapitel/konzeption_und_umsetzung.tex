@@ -7,27 +7,7 @@ Das Ziel des Assistenzsystems ist es, aus der Beschreibung einer
 Programmieraufgabe automatisiert Black-Box-Testfälle abzuleiten. Als
 Informationsgrundlage dient die Aufgabenbeschreibung oder die Spezifikation eines Programms
 und die Eingabebeschränkungen, die definiert welche Parameter als Input für das Programm erlaubt sind.
-
-Abbildung~\ref{fig:architektur} stellt den technischen Aufbau der Anwendungen dar und verdeutlicht wie die verschiedenen Softwarekomponenten zusammenhängen.
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.8\textwidth]{assets/architektur.png}
-    \caption{Architektur der Webanwendung}
-    \label{fig:architektur}
-\end{figure}
-
-Technisch besteht die Anwendung aus einem mit Python und dem Framework FastAPI realisierten Backend sowie einer mit HTML, CSS und JavaScript umgesetzten 
-Benutzeroberfläche. Beide Bestandteile werden gemeinsam innerhalb eines Serverprozesses betrieben. Über die Route GET / stellt das Backend die statischen 
-Dateien der Benutzeroberfläche bereit und liefert sie an den Browser aus.
-
-Die Benutzeroberfläche ermöglicht die Eingabe einer natürlichsprachlichen Programmieraufgabe und sendet diese anschließend über eine HTTP-POST-Anfrage an 
-den Endpunkt POST /api. Dort befindet sich die serverseitige Logik zur Verarbeitung der Anfrage und zur Generierung der Testfälle. Der Endpunkt übermittelt 
-die aufbereitete Aufgabenbeschreibung an das verwendete Large Language Model und gibt dessen Antwort anschließend an die Benutzeroberfläche im Browser zurück, wo die 
-generierten Testfälle dargestellt werden.
-
-\newpage
-Abbildung~\ref{fig:systemablauf} beschreibt wiederum den internen prozeduralen Ablauf der Anwendung.
+Abbildung~\ref{fig:systemablauf} verdeutlicht den internen prozeduralen Ablauf der Anwendung.
 
 \begin{figure}[h]
     \centering
@@ -36,20 +16,22 @@ Abbildung~\ref{fig:systemablauf} beschreibt wiederum den internen prozeduralen A
     \label{fig:systemablauf}
 \end{figure}
 
-Der Prozess kann aufgelistet dargestellt werden als, 
-\begin{itemize}
-    \item die Eingabe einer Programmieraufgabe über eine Weboberfläche,
-    \item die client- und serverseitige Prüfung der Eingabe,
-    \item die Übermittlung der Aufgabenbeschreibung als JSON an den Endpunkt
-          \texttt{POST /api},
-    \item die Ergänzung der Eingabe um einen serverseitig hinterlegten
-          System-Prompt,
-    \item der asynchronen Aufruf der OpenAI API über das offizielle
-          Python-SDK,
-    \item die Rückgabe der Modellantwort in einem einheitlichen
-          JSON-Response-Modell,
-    \item die kompakte Darstellung des Ergebnisses in der Weboberfläche.
-\end{itemize}
+Abbildung~\ref{fig:architektur} stellt wiederum den technischen Aufbau des Assistenzsystems dar. 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{assets/architektur.png}
+    \caption{Architektur der Webanwendung}
+    \label{fig:architektur}
+\end{figure}
+
+Die Anwendung besteht aus einem mit Python und dem Framework FastAPI 
+realisierten Backend sowie einer mit HTML, CSS und JavaScript umgesetzten Benutzeroberfläche. Beide Bestandteile werden gemeinsam innerhalb eines Serverprozesses 
+betrieben. Über die Route GET / stellt das Backend die statischen Dateien der Benutzeroberfläche bereit und liefert sie an den Browser aus.
+Die Benutzeroberfläche ermöglicht die Eingabe einer natürlichsprachlichen Programmieraufgabe und sendet diese anschließend über eine HTTP-POST-Anfrage an 
+den Endpunkt POST /api. Dort befindet sich die serverseitige Logik zur Verarbeitung der Anfrage und zur Generierung der Testfälle. Der Endpunkt übermittelt 
+die aufbereitete Aufgabenbeschreibung an das verwendete Large Language Model und gibt dessen Antwort anschließend an die Benutzeroberfläche im Browser zurück, wo die 
+generierten Testfälle dargestellt werden.
 
 \subsection{Aufbau des System-Prompts}
 Um dem LLM mehr Kontext und klare Guidlines zu geben, wird jeder Anfrage ein einheitlicher und vorab festgelegter System-Prompt beigefügt.
@@ -92,11 +74,6 @@ Der System-Prompt setzt sich konzeptionell aus fünf Bestandteilen zusammen:
 \end{enumerate}
 
 Der ganzheitliche System-Prompt kann dem ANHANG entnommen werden.
-
-Das vorgegebene JSON-Ausgabeformat wurde gewählt um die
-Antwort in der Benutzeroberfläche konsistent und kompakt darstellbar zu machen und
-um die Testfälle ohne manuelle Umformung in die von dem Projekt verwendete Testsimulation
-einlesen zu können.
 
 Trotz der präzisen Vorgaben stellt der Prompt keine formale Garantie für ein 
 gültiges Ausgabeformat, eingehaltene Constraints oder fachlich korrekte Sollwerte dar.
