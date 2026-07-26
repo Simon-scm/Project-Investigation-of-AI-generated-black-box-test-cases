@@ -1,12 +1,13 @@
 # ToDo
-Quellenangaben!
+Seitenangaben zu Quellen hinzufügen!
 API-Key wann löschen?
+
 System-Promt in Anhang.
-Programmieraufgaben in Anhang.
-Implementierungen in den Anhang mit Erklärung warum die falsche falsch ist.
+Programmieraufgaben + Testcases in Anhang -> Dort auch Erklärungen zu den Aufgaben einbiden, mit disclaimer das die Erklärung nicht der KI gegeben wurde. Erklärung aus Text entfernen.
 Screenshots vom Frontend in den Anhang.
-Auch test cases und results (json) in den Anhang. Oder manche Sachen davon irgendwie in beigefügte Dateien -> wenn ja, Verweise anpassen.
-Prompt zur Erstellung der Abbildungen in den Anhang. KI-Modell in die Quellen. Und in Texterwähnung der Abbildung Quelle referenzieren.
+Implementierungen und results nur in Anlagen -> Verweise anpassen
+
+Prompt zur Erstellung der Abbildungen in den Anhang.
 Abkürzungsverzeichnis füllen.
-Internetquellen in eigenes Quellenverzeichnis?!
-Seitenangaben zu Quellen hinzufügen.
+Source code mit Kommentaren füllen.
+Anleitung zum starten der Anwendung in die Zusatzdokumente.
