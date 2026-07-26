@@ -25,7 +25,7 @@ Abbildung~\ref{fig:architektur} stellt wiederum den technischen Aufbau des Assis
     \label{fig:architektur}
 \end{figure}
 
-Die Anwendung besteht aus einem mit Python und dem Framework FastAPI 
+Die Anwendung besteht aus einem mit Python und dem Framework FastAPI \cite{fastapi_documentation}
 realisierten Backend sowie einer mit HTML, CSS und JavaScript umgesetzten Benutzeroberfläche. Beide Bestandteile werden gemeinsam innerhalb eines Serverprozesses 
 betrieben. Über die Route GET / stellt das Backend die statischen Dateien der Benutzeroberfläche bereit und liefert sie an den Browser aus.
 Die Benutzeroberfläche ermöglicht die Eingabe einer natürlichsprachlichen Programmieraufgabe und sendet diese anschließend über eine HTTP-POST-Anfrage an 
@@ -34,9 +34,8 @@ die aufbereitete Aufgabenbeschreibung an das verwendete Large Language Model und
 generierten Testfälle dargestellt werden.
 
 \subsection{Aufbau des System-Prompts}
-Um dem LLM mehr Kontext und klare Guidlines zu geben, wird jeder Anfrage ein einheitlicher und vorab festgelegter System-Prompt beigefügt.
-Dieser System-Prompt stellt eine entscheidende Möglichkeit dar, indirekt Einfluss auf die Qulität der Ausgabe und somit auf die 
-Qualität der generierten Testfälle zu nehmen.
+Um dem LLM mehr Kontext und klare Vorgaben zu geben, wird jeder Anfrage ein einheitlicher und vorab festgelegter System-Prompt beigefügt.
+Dieser stellt eine wichtige Möglichkeit dar, das Verhalten des Modells und damit die Qualität der generierten Testfälle gezielt zu beeinflussen \cite{santana_software_2025}.
 Die vom Nutzer eingegebene konkrete Aufgabenbeschreibung wird davon getrennt als Benutzernachricht
 übermittelt. Diese Trennung verhindert, dass Instruktionen zur Rolle des LLM's, zum
 Ausgabeformat und zu den Qualitätsanforderungen bei jeder Anfrage erneut durch

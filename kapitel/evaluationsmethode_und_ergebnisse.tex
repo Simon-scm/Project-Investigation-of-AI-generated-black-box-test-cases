@@ -1,7 +1,7 @@
 \section{Evaluationsmethode und Ergebnisse}
 
 \subsection{Auswahl der Programmieraufgaben sowie der Referenz- und Fehlerimplementierungen}
-Die Programmieraufgaben stammen von der Coding-Challenge-Plattform Leetcode. Leetcode ist eine öffentliche Website auf der das Lösen verschiedener algorithmischer Programmieraufgaben mit unterschiedlichen 
+Die Programmieraufgaben stammen von der Coding-Challenge-Plattform Leetcode \cite{leetcode_problemset}. Leetcode ist eine öffentliche Website auf der das Lösen verschiedener algorithmischer Programmieraufgaben mit unterschiedlichen 
 Verfahren und Datenstrukturen geübt werden kann. Mit der Auswahl der Programmieraufgaben wurde versucht ein breites Spektrum an unterschiedlichen Problemarten und möglichen 
 Sonderfällen abzudecken. Es wurden insgesamt sieben Probleme für die Evaluation des Assistentsystems ausgewählt:
 \begin{enumerate}
@@ -43,31 +43,12 @@ Die korrekten und fehlerhaften Implementierungen, sowie eine Erklärung warum di
 Ein generierter Testfall kann aus zwei verschiedenen Gründen nicht valide sein. Seine Eingabewerte können außerhalb der in der
 Programmieraufgabe definierten Constraints liegen oder der vom Sprachmodell
 erzeugte erwartete Sollwert kann falsch sein. In beiden Fällen ist ein Fehlverhalten einer 
-Implementierung nicht interpretierbar, wodurch der Testfall unbrauchbar wird. Die
-Validitätsprüfung bildet deshalb eine notwendige Vorstufe für die darauf folgende
-Untersuchung zur Fehler- und Edge-Case-Abdeckung.
+Implementierung nicht interpretierbar, wodurch der Testfall unbrauchbar wird. Die Kennzahlen wurden wie folgt berechnet:
 
-Zu jede der sieben Programmieraufgabe wurden 15 Testfälle durch das Assistentsystem generiert. 
-Insgesamt kommt die Untersuchung somit auf 105 Testfälle.
-Anschließend wurde zu jeder Aufgabe die korrekte Referenzimplementierung mit den 15 generierten Testfällen ausgeführt.
-
-Das daraus resultierende Ergebnis wurde anschließend mit dem von der KI erwarteten Ergebnis verglichen. Der im Ergebnisdatensatz (im ANHANG)
-im Feld \texttt{matches-}\allowbreak\texttt{expected} gespeicherte Wert gibt an, ob beide Ergebnisse übereinstimmen
-
-Da ein Testfall auf zwei verschieden Arten nicht valide sein kann erfolgte die Validitätsprüfung innerhalb des Ergebnisdatensatzes in zwei 
-Schritten:
-
-\begin{enumerate}
-    \item Zunächst wurde geprüft, ob sämtliche Eingabewerte eines Testfalls
-          innerhalb der in der Aufgabenbeschreibung genannten Constraints
-          liegen. Testfälle außerhalb dieser Beschränkung wurden als
-          unzulässig markiert.
-    \item Für die verbleibenden zulässigen Testfälle wurde geprüft, ob der
-          von der KI erwartete Sollwert mit dem Ergebnis der Referenzimplementierung
-          übereinstimmt. Eine Abweichung wurde als Sollwertfehler gewertet.
-\end{enumerate}
-
-Die daraus resultierende Sollwertvalidität wurde wie folgt berechnet:
+\[
+Constraint-Konformitaetsrate =
+\frac{N_{\mathrm{zulaessig}}}{N_{\mathrm{gesamt}}} \cdot 100
+\]
 
 \[
 Sollwertvaliditaet =
@@ -81,35 +62,44 @@ Ergänzend wurde die Gesamtquote unmittelbar nutzbarer Testfälle berechnet.
 Sie bildet das Verhältnis der Testfälle, die gleichzeitig zulässig sind und einen korrekten
 Sollwert besitzen, gegenüber allen generierten Testfällen ab.
 
-\[
-Gesamtquote =
-\frac{N_{\mathrm{zulaessig-und-korrekt}}}{N_{\mathrm{gesamt}}} \cdot 100
-\]
+Zu jede der sieben Programmieraufgabe wurden 15 Testfälle durch das Assistentsystem generiert. 
+Insgesamt kommt die Untersuchung somit auf 105 Testfälle.
+Anschließend wurde zu jeder Aufgabe die korrekte Referenzimplementierung mit den 15 generierten Testfällen ausgeführt.
+Das daraus resultierende Ergebnis wurde anschließend mit dem von der KI erwarteten Ergebnis verglichen. Der im Ergebnisdatensatz (im ANHANG)
+im Feld \texttt{matches-}\allowbreak\texttt{expected} gespeicherte Wert gibt an, ob beide Ergebnisse übereinstimmen.
+
+
 
 \subsubsection{Ergebnisse der Validitätsprüfung}
 Bei der manuelle Constraint-Prüfung konnten insgesamt zehn unzulässige
-Testfälle identifiziert werden. Ddavon entfielen zwei auf Problem 1 und die restlichen 
+Testfälle identifiziert werden. Davon entfielen zwei auf Problem 1 und die restlichen 
 acht auf Problem 5. Bei Problem 1 wurde mit \(n=2\,863\,311\,530\) ein Wert außerhalb des
 erlaubten Bereichs \(1 \leq n \leq 2^{31}-1\) (2\,147\,483\,647) erzeugt. Bei Problem 5
 enthielten acht Testfälle mindestens einen Eingabewert 0, obwohl für alle drei
 Eingabevariablen positive Werte zwischen 1 und \(10^9\) durch die Beschränkungen 
 innerhalb der Aufgabenstellung vorgeschrieben waren.
-Damit erfüllten 95 von 105 Eingaben die in den Aufgaben gesetzten Eingabebeschränkungen
-(Constraint-Konformitätsrate = \(90{,}5\,\%\)).
+Damit erfüllten 95 von 105 Eingaben die in den Aufgaben gesetzten Eingabebeschränkungen was 
+einer Constraint-Konformitätsrate von 
+
+\[
+\frac{95}{105} \cdot 100 = 90{,}48\,\%.
+\]
+
+entspricht.
 
 Unter den 95 zulässigen Testfällen wurden 86 Sollwerte durch die
 Referenzimplementierungen bestätigt. Neun zulässige Testfälle enthielten
-einen falschen Sollwert. Daraus ergibt sich eine Sollwertvalidität von
+einen falschen Sollwert. Daraus ergibt sich eine Sollwertvalidität von 
 
 \[
-\frac{86}{95} \cdot 100 = 90{,}5\,\%.
+\frac{86}{95} \cdot 100 = 90{,}53\,\%.
 \]
 
 Bezogen auf alle 105 generierten Testfälle ergibt sich eine
 Gesamtquote an unmittelbar nutzbaren Testfällen von
 
 \[
-\frac{86}{105} \cdot 100 \approx 81{,}9\,\%.
+\frac{86}{105} \cdot 100 \approx 81{,}90\,\%.
 \]
 
 Die Ergebnisse aus der Auswertung der einzelnen Aufgaben sind in
@@ -141,11 +131,11 @@ Die Sollwertfehler konzentrieren sich vollständig auf zwei Aufgaben. Bei
 Problem 2, der Sortierung von Vokalen nach Häufigkeit und Erstauftreten,
 waren acht der 15 erwarteten Ausgaben falsch. Obwohl sämtliche Eingaben die
 Constraints erfüllten, erreichte diese Aufgabe somit nur eine
-Sollwertvalidität von \(46{,}7\,\%\). 
+Sollwertvalidität von \(46{,}66\,\%\). 
 
 Bei Problem 3, der Rotation einer verketteten Liste, trat ein einzelner
 Sollwertfehler in Testfall 12 auf. Die übrigen 14 zulässigen Testfälle
-wurden korrekt berechnet, was einer Validitätsrate von \(93{,}3\,\%\)
+wurden korrekt berechnet, was einer Validitätsrate von \(93{,}33\,\%\)
 entspricht. Für alle anderen Probleme erreichten die von der KI generierten Testfälle nach Entfernung
 unzulässiger Eingaben eine Sollwertvalidität von \(100\,\%\).
 
@@ -153,10 +143,10 @@ unzulässiger Eingaben eine Sollwertvalidität von \(100\,\%\).
 Aus den Ergebnissen der Validitätsprüfung lassen sich erste interessante Schlüsse ziehen.
 Auffällig ist das bei den ausgewählten Aufgaben scheinbar kein Zusammenhang zwischen der 
 Constraint-Konformitätsrate und der Sollwertvaliditätsrate besteht. Bei Problem 5 lag die 
-Constraint-Konformitätsrate mit \(46{,}7\,\%\) deutlich unter dem Durchschnitt, die Sollwertvaliditätsrate 
+Constraint-Konformitätsrate mit \(46{,}66\,\%\) deutlich unter dem Durchschnitt, die Sollwertvaliditätsrate 
 der generierten Testfälle zu diesem Problem lag jedoch bei \(100\,\%\). 
 Andersrum lag die Constraint-Konformitätsrate bei Problem 2 bei \(100\,\%\) und die Sollwertvaliditätsrate 
-nur bei \(46{,}7\,\%\). Die Untersuchung deutet folglich darauf hin, dass eine geringe Constraint-Konformitätsrate 
+nur bei \(46{,}66\,\%\). Die Untersuchung deutet folglich darauf hin, dass eine geringe Constraint-Konformitätsrate 
 nicht zwangsläufig eine geringe Sollwertvaliditätsrate impliziert und umgekehrt.
 
 Insbesondere die 8 falsch erzeugten Testfälle für Problem 5 scheinen bezüglich der Constraint-Konformität bemerkenswert. 
@@ -197,7 +187,7 @@ Von den 86 validen Testfällen führen 13 bei einer fehlerhaften Implementierung
 Sollwert abweichenden Ergebnis. Tabelle~\ref{tab:fehlererkennung-probleme} zeigt, das sich die 
 13 Testfälle so auf die einzelnen Aufgaben aufteilen, dass sechs der sieben fehlerhaften Implementierungen 
 durch mindestens einen validen Testfall erkannt werden. Dies entspricht einer Erkennungsrate von rund
-85,7\,\%. Nur für Problem~5 wurde durch das LLM kein valider Testfall erzeugt, der den eingebauten
+\(85,71\,\%\). Nur für Problem~5 wurde durch das LLM kein valider Testfall erzeugt, der den eingebauten
 Fehler sichtbar macht.
 
 \begin{table}[htbp]
@@ -241,7 +231,7 @@ Die Analyse der Fehlererkennung gepaart mit der zur Validitätsrate impliziert a
 Auffällig ist das für Problem 2 ein Testfall generiert wurde welcher die falsche Lösung erkennt, obwohl das LLM zuvor Schwierigkeiten 
 damit hatte die korrekten Sollwerte für die eigens generierten Testfälle zu antizipieren. Auf der anderen Seite wurde für Problem 5 kein 
 Testfall generiert der die falsche Implementierung erkennen konnte. Hier hatte das LLM vorab Probleme die mitgegebenen Eingabebeschränkungen 
-(Constraints) zu befolgen, konnte aber die Sollwerte der Testfälle zu 100\,\% korrekt vorhersagen. Diese Beobachtung schlägt vor, dass 
+(Constraints) zu befolgen, konnte aber die Sollwerte der Testfälle zu \(100\,\%\) korrekt vorhersagen. Diese Beobachtung schlägt vor, dass 
 die Generierung fehlerekennender Testfälle weniger von der semantischen Komplexität der Aufgabenstellung, sondern mehr vom Verständnis der 
 vorgegebenen Eingabebeschränkung abhängt.
 
