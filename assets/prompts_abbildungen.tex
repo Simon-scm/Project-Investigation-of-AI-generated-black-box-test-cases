@@ -1,0 +1,42 @@
+\section{Prompts zur Erstellung der Abbildungen}
+\label{anhang:prompst_abbildungen}
+
+\textbf{Abbildung 1: Systemablauf innerhalb der Webanwendung}
+\newline
+Prompt: 
+\enquote{Erstelle ein kompaktes, Prozessdiagramm im Querformat, das sich gut zwischen Text auf einer DINA4 Seite einfügen lässt. Verwende ausschließlich Schwarz, Weiß und helle Grautöne, einen weißen Hintergrund.
+
+Die Prozessschritte lauten:\newline
+1 BROWSER: Aufgabe eingeben\newline
+2 API: Eingabe prüfen\newline
+3 BACKEND: Prompt bilden\newline
+4 OPENAI: Testfälle erzeugen\newline
+5 API: Antwort zurückgeben\newline
+6 BROWSER: JSON darstellen
+
+Verbinde die Boxen mit n Pfeilen. Beschrifte die Verbindungen mit:\newline
+1 -> 2: POST /api\newline
+2 -> 3: validiert\newline
+3 -> 4: HTTPS\newline
+4 -> 5: output\_text\newline
+5 -> 6: JSON
+
+Platziere sämtliche Pfeilbeschriftungen mit ausreichend Abstand zu den Boxen und Pfeilen. Die Beschriftungen sollen mit keinem anderen Elementen überlappen.}
+
+\textbf{Abbildung 2: Architektur der Webanwendung}
+\newline
+Prompt:
+\enquote{Erstelle ein Architekturdiagramm im gleichen Format und Style wie das Prozessdiagramm.
+
+Stelle drei Komponenten nebeneinander dar:
+
+1. Webbrowser als Client: \newline
+- Zeigt das über die GET / Route das UI mit den Dateien index.html, styles.css und app.js vom Server bereitgestellt wird.\newline
+- Zeigt außerdem das über die POST /api Route die Anfrage an das Backend geschickt wird.
+
+2. FastAPI Backend als Server:\newline
+-  GET / worüber die statischen Dateien an den Client geschickt werden\newline
+- POST /api wo die Anfragen ankommen, geprüft werden, der System-Promt eingebaut wird und die Anfrage an die OpenAI API geschickt wird
+
+3. OpenAI API:\newline
+Verarbeitet die Anfrage des Backends, erstellt die Testfälle und gibt sie zurück}
