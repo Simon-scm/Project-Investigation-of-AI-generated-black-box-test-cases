@@ -26,7 +26,7 @@ Abbildung~\ref{fig:architektur} stellt wiederum den technischen Aufbau des Assis
 \end{figure}
 
 Die Anwendung besteht aus einem mit Python und dem Framework FastAPI \cite{fastapi_documentation}
-realisierten Backend sowie einer mit HTML, CSS und JavaScript umgesetzten Benutzeroberfläche. Beide Bestandteile werden gemeinsam innerhalb eines Serverprozesses 
+realisierten Backend sowie einer mit HTML, CSS und JavaScript umgesetzten Benutzeroberfläche (Anhang~\ref{anhang:web-ui}). Beide Bestandteile werden gemeinsam innerhalb eines Serverprozesses 
 betrieben. Über die Route GET / stellt das Backend die statischen Dateien der Benutzeroberfläche bereit und liefert sie an den Browser aus.
 Die Benutzeroberfläche ermöglicht die Eingabe einer natürlichsprachlichen Programmieraufgabe und sendet diese anschließend über eine HTTP-POST-Anfrage an 
 den Endpunkt POST /api. Dort befindet sich die serverseitige Logik zur Verarbeitung der Anfrage und zur Generierung der Testfälle. Der Endpunkt übermittelt 
@@ -72,7 +72,7 @@ Der System-Prompt setzt sich konzeptionell aus fünf Bestandteilen zusammen:
           Feld \texttt{expected}, welches das vom Modell erwartete Ergebnis speichert.
 \end{enumerate}
 
-Der ganzheitliche System-Prompt kann Anhang~\ref{anhang-system-prompt} entnommen werden.
+Der ganzheitliche System-Prompt kann Anhang~\ref{anhang:system-prompt} entnommen werden.
 
 Trotz der präzisen Vorgaben stellt der Prompt keine formale Garantie für ein 
 gültiges Ausgabeformat, eingehaltene Constraints oder fachlich korrekte Sollwerte dar.

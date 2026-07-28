@@ -40,7 +40,7 @@ Sollwert besitzen, gegenüber allen generierten Testfällen ab.
 
 Zu jede der sieben Programmieraufgabe wurden 15 Testfälle durch das Assistentsystem generiert. 
 Insgesamt kommt die Untersuchung somit auf 105 Testfälle.
-Anschließend wurde zu jeder Aufgabe die korrekte Referenzimplementierung mit den 15 generierten Testfällen ausgeführt.
+Zu jeder Aufgabe wurde die korrekte Referenzimplementierung mit den 15 generierten Testfällen ausgeführt.
 Das daraus resultierende Ergebnis wurde anschließend mit dem von der KI erwarteten Ergebnis verglichen. 
 Die Ergebnisse der Ausführung sowie die dazu genutzten Referenzimplementierungen befinden sich in der Anlage \(test-results.md\).
 Das Feld \texttt{matches-}\allowbreak\texttt{expected} im Ergebnisdatensatz gibt an, ob beide Ergebnisse übereinstimmen.
@@ -104,14 +104,9 @@ Tabelle~\ref{tab:validitaet-probleme} zusammengefasst.
 
 Die Sollwertfehler konzentrieren sich vollständig auf zwei Aufgaben. Bei
 Problem 2, der Sortierung von Vokalen nach Häufigkeit und Erstauftreten,
-waren acht der 15 erwarteten Ausgaben falsch. Obwohl sämtliche Eingaben die
-Constraints erfüllten, erreichte diese Aufgabe somit nur eine
-Sollwertvalidität von \(46{,}66\,\%\). 
-
-Bei Problem 3, der Rotation einer verketteten Liste, trat ein einzelner
+waren acht der 15 erwarteten Ausgaben falsch. Bei Problem 3, der Rotation einer verketteten Liste, trat ein einzelner
 Sollwertfehler in Testfall 12 auf. Die übrigen 14 zulässigen Testfälle
-wurden korrekt berechnet, was einer Validitätsrate von \(93{,}33\,\%\)
-entspricht. Für alle anderen Probleme erreichten die von der KI generierten Testfälle nach Entfernung
+wurden korrekt berechnet. Für alle anderen Probleme erreichten die von der KI generierten Testfälle nach Entfernung
 unzulässiger Eingaben eine Sollwertvalidität von \(100\,\%\).
 
 \subsubsection{Interpretation der Untersuchten Validitätsrate}

@@ -109,6 +109,7 @@
 \usepackage{csquotes}
 
 \usepackage{pdfpages}
+\usepackage{pdflscape}
 
 \usepackage{listings}
 \lstset{
@@ -153,6 +154,7 @@ Simon Schmitz\\[2cm]
 Vorgelegt bei: & Prof. Dr. Klemens Waldhör \\
 Matrikelnummer: & 821212 \\
 Abgabedatum: & 31.07.2026 \\
+Wortanzahl: & 3.296 \\
 \end{tabular}
 
 \vfill
@@ -213,8 +215,17 @@ Abgabedatum: & 31.07.2026 \\
 \newpage
 
 % -------------------------------------------------
+% KI-Disclaimer
+% -------------------------------------------------
+\clearpage
+\phantomsection
+\input{zusatz/ai-disclaimer.tex}
+\addcontentsline{toc}{section}{Angabe zur Nutzung von künstlicher Intelligenz}
+
+% -------------------------------------------------
 % Anhang
 % -------------------------------------------------
+\clearpage
 \input{zusatz/anhang}
 
 % -------------------------------------------------
