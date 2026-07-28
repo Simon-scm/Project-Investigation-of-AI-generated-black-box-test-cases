@@ -13,10 +13,10 @@
     numbers=none,
     tabsize=2
 }
-Die folgende Auflisting enthält die Aufgabenbeschreibungen und Eingabebeschränkungen (Constraints), die daraus generierten Testfälle 
+Die folgende Auflistung enthält die Aufgabenbeschreibungen und Eingabebeschränkungen (Constraints), die daraus generierten Testfälle 
 und eine Erklärung der jeweiligen Aufgabe. 
 
-\subsection{Problem 1: Binary Number with Alternating Bits (Leetcode 693)}
+\subsection{Problem 1: Binary Number with Alternating Bits (LeetCode 693)}
 
 \subsubsection*{Aufgabenbeschreibung}
 Given a positive integer, check whether it has alternating bits: namely, if two adjacent bits will always have different values
@@ -48,13 +48,13 @@ Given a positive integer, check whether it has alternating bits: namely, if two 
 \end{lstlisting}
 
 \subsubsection*{Erklärung der Aufgabe}
-Die Binärdarstellung einer Positiven Ganzzahl soll darauf geprüft werden, 
-ob sich benachbarte Bits überall unterscheiden. Algorithmisch muss die Bitfolge von rechts nach links durchgegangen werden um jedes Bit 
+Die Binärdarstellung einer positiven Ganzzahl soll darauf geprüft werden, 
+ob sich benachbarte Bits überall unterscheiden. Algorithmisch muss die Bitfolge von rechts nach links durchgegangen werden, um jedes Bit 
 mit seinem direkten Nachbarn zu vergleichen.
 
 \clearpage
 
-\subsection{Problem 2: Sort Vowels by frequrency (Leetcode 3913)}
+\subsection{Problem 2: Sort Vowels by frequency (LeetCode 3913)}
 
 \subsubsection*{Aufgabenbeschreibung}
 You are given a string s consisting of lowercase English characters.
@@ -71,7 +71,7 @@ Input: s = 'leetcode'
 Output: 'leetcedo'
 
 Explanation: Vowels in the string are ['e', 'e', 'o', 'e'] with frequencies: e = 3, o = 1. Sorting in non-increasing order of frequency and placing them back 
-into the vowel positions results in "leetcedo".
+into the vowel positions results in \enquote{leetcedo}.
 
 \subsubsection*{Constraints}
 \begin{lstlisting}[style=appendixdata]
@@ -102,12 +102,12 @@ s consists of lowercase English letters
 
 \subsubsection*{Erklärung der Aufgabe}
 Innerhalb einer Zeichenkette sollen ausschließlich die Vokale nach absteigender Häufigkeit umsortiert werden. Alle Konsonanten 
-sollen ihre ursprüngliche Postition beibehalten. Algorithmisch besteht die Herausforderung darin, dass die Vokalhäufigkeiten und die intiale Ordnung der Vokale bestimmt 
-werden muss, woraufhin eine sortierte Vokalfolge erstellt werden kann um diese auf die ursprüngliche Zeichenkette anzuwenden.
+sollen ihre ursprüngliche Position beibehalten. Algorithmisch besteht die Herausforderung darin, dass die Vokalhäufigkeiten und die initiale Ordnung der Vokale bestimmt 
+werden muss, woraufhin eine sortierte Vokalfolge erstellt werden kann, um diese auf die ursprüngliche Zeichenkette anzuwenden.
 
 \clearpage
 
-\subsection{Problem 3: Rotate List (Leetcode 61)}
+\subsection{Problem 3: Rotate List (LeetCode 61)}
 
 \subsubsection*{Aufgabenbeschreibung}
 Given the head of a linked list, rotate the list to the right by k places.
@@ -141,12 +141,12 @@ The number of nodes in the list is in the range [0, 500].
 \end{lstlisting}
 
 \subsubsection*{Erklärung der Aufgabe}
-Eine verkette Liste soll um eine vorgegebene Anzahl an Postitionen (k) nach rechts verschoben werden. Das Verschieben der einzelnen 
-Knoten wird durch das Verbinden der verketten Liste und das Trennen an einer anderen Stelle abgebildet.
+Eine verkettete Liste soll um eine vorgegebene Anzahl an Positionen (k) nach rechts verschoben werden. Das Verschieben der einzelnen 
+Knoten wird durch das Verbinden der verketteten Liste und das Trennen an einer anderen Stelle abgebildet.
 
 \clearpage
 
-\subsection{Problem 4: Find Highest Altitude(Leetcode 1732)}
+\subsection{Problem 4: Find Highest Altitude (LeetCode 1732)}
 
 \subsubsection*{Aufgabenbeschreibung}
 There is a biker going on a road trip. The road trip consists of n + 1 points at various altitudes. The biker starts his trip on point 0 with altitude equal 0.
@@ -181,12 +181,12 @@ n == gain.length
 \end{lstlisting}
 
 \subsubsection*{Erklärung der Aufgabe}
-Die Aufgabe beschreibt eine Autofahrt welche auf Höhe 0 beginnt. Ein Array beinhaltet die relativen Höhenänderungen zwischen 
-aufeinanderfolgenden Punkten. Gesucht wird die absolut höchste Stelle, was algorithmisch der Bestimmung der höchsten Präfixsumme entspricht.
+Die Aufgabe beschreibt eine Autofahrt, die auf Höhe 0 beginnt. Ein Array beinhaltet die relativen Höhenänderungen zwischen 
+aufeinanderfolgenden Punkten. Gesucht wird die höchste während der Fahrt erreichte Höhe, was algorithmisch der Bestimmung der höchsten Präfixsumme entspricht.
 
 \clearpage
 
-\subsection{Problem 5: Minimum Flips (Leetcode 1318)}
+\subsection{Problem 5: Minimum Flips (LeetCode 1318)}
 
 \subsubsection*{Aufgabenbeschreibung}
 Given 3 positives numbers a, b and c. Return the minimum flips required in some bits of a and b to make ( a OR b == c ). (bitwise OR operation). Flip operation consists of change any single bit 1 to 0 or change the bit 0 to 1 in their binary representation.
@@ -226,7 +226,7 @@ und ob eine oder zwei Änderungen dafür erforderlich sind.
 
 \clearpage
 
-\subsection{Problem 6: Sort Colors (Leetcode 75)}
+\subsection{Problem 6: Sort Colors (LeetCode 75)}
 
 \subsubsection*{Aufgabenbeschreibung}
 Given an array nums with n objects colored red, white, or blue, sort them in-place so that objects of the same color are adjacent, with the colors in the order red, white, and blue.
@@ -262,12 +262,12 @@ nums[i] is either 0, 1, or 2.
 \end{lstlisting}
 
 \subsubsection*{Erklärung der Aufgabe}
-Ein Array aus den Werten 0, 1 und 2, welche die Farben rot, weiß und blau representieren, soll ohne die Verwendung von Bibliotheksfunktionen 
+Ein Array aus den Werten 0, 1 und 2, welche die Farben rot, weiß und blau repräsentieren, soll ohne die Verwendung von Bibliotheksfunktionen 
 in-place in aufsteigende Reihenfolge sortiert werden.
 
 \clearpage
 
-\subsection{Problem 7: Max Number of K-Sum Pairs (Leetcode 1679)}
+\subsection{Problem 7: Max Number of K-Sum Pairs (LeetCode 1679)}
 
 \subsubsection*{Aufgabenbeschreibung}
 You are given an integer array nums and an integer k.
@@ -303,6 +303,6 @@ Return the maximum number of operations you can perform on the array.
 \end{lstlisting}
 
 \subsubsection*{Erklärung der Aufgabe}
-Aus einem Zahlen-Array sollen möglichst viele Paare gefunden und entfernt werden, deren Summe einem vorgegebenen Wert k entspricht. 
+Aus einem Zahlenarray sollen möglichst viele Paare gefunden und entfernt werden, deren Summe einem vorgegebenen Wert k entspricht. 
 Die algorithmische Herausforderung besteht darin, passende Komplementwerte unter Berücksichtigung ihrer Häufigkeiten zuzuordnen, sodass jedes Element höchstens einmal 
 verwendet wird.

@@ -6,7 +6,7 @@ KI-gestützten Generierung von Black-Box-Testfällen entwickelt.
 Das Ziel des Assistenzsystems ist es, aus der Beschreibung einer
 Programmieraufgabe automatisiert Black-Box-Testfälle abzuleiten. Als
 Informationsgrundlage dient die Aufgabenbeschreibung oder die Spezifikation eines Programms
-und die Eingabebeschränkungen, die definiert welche Parameter als Input für das Programm erlaubt sind.
+und die Eingabebeschränkungen, die definieren welche Parameter als Input für das Programm erlaubt sind.
 Abbildung~\ref{fig:systemablauf} verdeutlicht den internen prozeduralen Ablauf der Anwendung.
 
 \begin{figure}[h]
@@ -27,9 +27,9 @@ Abbildung~\ref{fig:architektur} stellt wiederum den technischen Aufbau des Assis
 
 Die Anwendung besteht aus einem mit Python und dem Framework FastAPI \cite{fastapi_documentation}
 realisierten Backend sowie einer mit HTML, CSS und JavaScript umgesetzten Benutzeroberfläche (Anhang~\ref{anhang:web-ui}). Beide Bestandteile werden gemeinsam innerhalb eines Serverprozesses 
-betrieben. Über die Route GET / stellt das Backend die statischen Dateien der Benutzeroberfläche bereit und liefert sie an den Browser aus.
+betrieben. Über die Route \texttt{GET /} stellt das Backend die statischen Dateien der Benutzeroberfläche bereit und liefert sie an den Browser aus.
 Die Benutzeroberfläche ermöglicht die Eingabe einer natürlichsprachlichen Programmieraufgabe und sendet diese anschließend über eine HTTP-POST-Anfrage an 
-den Endpunkt POST /api. Dort befindet sich die serverseitige Logik zur Verarbeitung der Anfrage und zur Generierung der Testfälle. Der Endpunkt übermittelt 
+den Endpunkt \texttt{POST /api}. Dort befindet sich die serverseitige Logik zur Verarbeitung der Anfrage und zur Generierung der Testfälle. Der Endpunkt übermittelt 
 die aufbereitete Aufgabenbeschreibung an das verwendete Large Language Model und gibt dessen Antwort anschließend an die Benutzeroberfläche im Browser zurück, wo die 
 generierten Testfälle dargestellt werden.
 
@@ -37,7 +37,7 @@ generierten Testfälle dargestellt werden.
 Um dem LLM mehr Kontext und klare Vorgaben zu geben, wird jeder Anfrage ein einheitlicher und vorab festgelegter System-Prompt beigefügt.
 Dieser stellt eine wichtige Möglichkeit dar, das Verhalten des Modells und damit die Qualität der generierten Testfälle gezielt zu beeinflussen \cite{santana_software_2025}.
 Die vom Nutzer eingegebene konkrete Aufgabenbeschreibung wird davon getrennt als Benutzernachricht
-übermittelt. Diese Trennung verhindert, dass Instruktionen zur Rolle des LLM's, zum
+übermittelt. Diese Trennung verhindert, dass Instruktionen zur Rolle des LLMs, zum
 Ausgabeformat und zu den Qualitätsanforderungen bei jeder Anfrage erneut durch
 die Benutzeroberfläche bereitgestellt werden müssen. Gleichzeitig sorgt sie
 für ein einheitliches experimentelles Vorgehen, da alle Aufgaben unter
@@ -66,7 +66,7 @@ Der System-Prompt setzt sich konzeptionell aus fünf Bestandteilen zusammen:
           Diese Vorgaben sollen sowohl unzulässige Eingaben als auch
           eine künstliche Verbesserung der Abdeckung durch kopierte Beispiele
           vermeiden.
-    \item \textbf{Ausgabevertrag:} Die Antwort des LLM's soll ausschließlich aus einem
+    \item \textbf{Ausgabevertrag:} Die Antwort des LLMs soll ausschließlich aus einem
           gültigen JSON-Objekt bestehen. Jeder einzelne Testfall enthält die für die
           jeweilige Funktionssignatur erforderlichen Eingabevariablen und das
           Feld \texttt{expected}, welches das vom Modell erwartete Ergebnis speichert.

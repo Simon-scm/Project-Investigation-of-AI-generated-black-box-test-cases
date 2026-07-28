@@ -1,19 +1,19 @@
 \section{Evaluationsmethode und Ergebnisse}
 
 \subsection{Auswahl der Programmieraufgaben sowie der Referenz- und Fehlerimplementierungen}
-Die Programmieraufgaben stammen von der Coding-Challenge-Plattform Leetcode \cite{leetcode_problemset}. Leetcode ist eine öffentliche Website auf der das Lösen verschiedener 
-algorithmischer Programmieraufgaben mit unterschiedlichen Verfahren und Datenstrukturen geübt werden kann. Mit der Auswahl der Programmieraufgaben wurde versucht ein breites 
-Spektrum an unterschiedlichen Problemarten und möglichen Sonderfällen abzudecken. Es wurden insgesamt sieben Probleme für die Evaluation des Assistentsystems ausgewählt.
-Die genauen Aufgabenstellungen und die daraus generierten Testfälle können Anhang~\ref{anhang:programmieraufgaben-testfaelle} entnommen werden.
+Die Programmieraufgaben stammen von der Coding-Challenge-Plattform LeetCode \cite{leetcode_problemset}. LeetCode ist eine öffentliche Website, auf der das Lösen verschiedener 
+algorithmischer Programmieraufgaben mit unterschiedlichen Verfahren und Datenstrukturen geübt werden kann. Mit der Auswahl der Programmieraufgaben wurde versucht, ein breites 
+Spektrum an unterschiedlichen Problemarten und möglichen Sonderfällen abzudecken. Es wurden insgesamt sieben Probleme für die Evaluation des Assistenzsystems ausgewählt.
+Die genauen Aufgabenstellungen und die daraus generierten Testfälle können dem Anhang~\ref{anhang:programmieraufgaben-testfaelle} entnommen werden.
 
 Die korrekten Referenzimplementierungen sowie die falschen Lösungen zu den aufgeführten Programmieraufgaben stammen aus eigener Entwicklung. Die Referenzimplementierungen 
-wurden auf der Leetcode-Plattform eingereicht und gegenüber der dort vorhandenen Testsuite validiert. Dadurch liegt für jede Programmieraufgabe eine geprüft korrekte Lösung vor, 
+wurden auf der LeetCode-Plattform eingereicht und gegenüber der dort vorhandenen Testsuite validiert. Dadurch liegt für jede Programmieraufgabe eine geprüft korrekte Lösung vor, 
 die im weiteren Verlauf dieser Untersuchung als Vergleichsgrundlage für die Validierung der KI-generierten erwarteten Ergebnisse dient. 
 
 Die hier als bewusst fehlerhaft verwendeten Lösungen basieren ebenfalls auf eigenen früheren Lösungsversuchen zu den jeweiligen Problemen. Für die Untersuchung ist das 
-vorteilhaft, da es sich nicht um künstlich konstruierte oder absichtlich eingebaute Fehler, sondern um tatsächilche, während des menschlichen Problemlösungsprozesses 
-enstandene Implementierungsfehler handelt. Diese falschen Lösungsversuche liefern für viele typische Testfälle das korrekte Ergebnis, scheitern jedoch an spezifischen Grenz- 
-oder Sonderfällen. Dadurch eignen sie sich besonders dafür zu überpfrüfen wie gut die KI-generierten Testfälle fehlerhafte Implementierungen entlarven.
+vorteilhaft, da es sich nicht um künstlich konstruierte oder absichtlich eingebaute Fehler, sondern um tatsächliche, während des menschlichen Problemlösungsprozesses 
+entstandene Implementierungsfehler handelt. Diese falschen Lösungsversuche liefern für viele typische Testfälle das korrekte Ergebnis, scheitern jedoch an spezifischen Grenz- 
+oder Sonderfällen. Dadurch eignen sie sich besonders dafür zu überprüfen, wie gut die KI-generierten Testfälle fehlerhafte Implementierungen entlarven.
 
 \subsection{Validität der generierten Testfälle}
 Ein generierter Testfall kann aus zwei verschiedenen Gründen nicht valide sein. Seine Eingabewerte können außerhalb der in der
@@ -38,23 +38,23 @@ Ergänzend wurde die Gesamtquote unmittelbar nutzbarer Testfälle berechnet.
 Sie bildet das Verhältnis der Testfälle, die gleichzeitig zulässig sind und einen korrekten
 Sollwert besitzen, gegenüber allen generierten Testfällen ab.
 
-Zu jede der sieben Programmieraufgabe wurden 15 Testfälle durch das Assistentsystem generiert. 
+Zu jeder der sieben Programmieraufgaben wurden 15 Testfälle durch das Assistenzsystem generiert. 
 Insgesamt kommt die Untersuchung somit auf 105 Testfälle.
 Zu jeder Aufgabe wurde die korrekte Referenzimplementierung mit den 15 generierten Testfällen ausgeführt.
 Das daraus resultierende Ergebnis wurde anschließend mit dem von der KI erwarteten Ergebnis verglichen. 
-Die Ergebnisse der Ausführung sowie die dazu genutzten Referenzimplementierungen befinden sich in der Anlage \(test-results.md\).
+Die Ergebnisse der Ausführung sowie die dazu genutzten Referenzimplementierungen befinden sich in der Anlage \texttt{test-results.md}.
 Das Feld \texttt{matches-}\allowbreak\texttt{expected} im Ergebnisdatensatz gibt an, ob beide Ergebnisse übereinstimmen.
 
 \subsubsection{Ergebnisse der Validitätsprüfung}
-Bei der manuelle Constraint-Prüfung konnten insgesamt zehn unzulässige
+Bei der manuellen Constraint-Prüfung konnten insgesamt zehn unzulässige
 Testfälle identifiziert werden. Davon entfielen zwei auf Problem 1 und die restlichen 
 acht auf Problem 5. Bei Problem 1 wurde mit \(n=2\,863\,311\,530\) ein Wert außerhalb des
 erlaubten Bereichs \(1 \leq n \leq 2^{31}-1\) (2\,147\,483\,647) erzeugt. Bei Problem 5
 enthielten acht Testfälle mindestens einen Eingabewert 0, obwohl für alle drei
 Eingabevariablen positive Werte zwischen 1 und \(10^9\) durch die Beschränkungen 
 innerhalb der Aufgabenstellung vorgeschrieben waren.
-Damit erfüllten 95 von 105 Eingaben die in den Aufgaben gesetzten Eingabebeschränkungen was 
-einer Constraint-Konformitätsrate von 
+Damit erfüllten 95 von 105 Eingaben die in den Aufgaben gesetzten Eingabebeschränkungen, 
+was einer Constraint-Konformitätsrate von 
 
 \[
 \frac{95}{105} \cdot 100 = 90{,}48\,\%.
@@ -109,33 +109,33 @@ Sollwertfehler in Testfall 12 auf. Die übrigen 14 zulässigen Testfälle
 wurden korrekt berechnet. Für alle anderen Probleme erreichten die von der KI generierten Testfälle nach Entfernung
 unzulässiger Eingaben eine Sollwertvalidität von \(100\,\%\).
 
-\subsubsection{Interpretation der Untersuchten Validitätsrate}
+\subsubsection{Interpretation der untersuchten Validitätsrate}
 Aus den Ergebnissen der Validitätsprüfung lassen sich erste interessante Schlüsse ziehen.
-Auffällig ist das bei den ausgewählten Aufgaben scheinbar kein Zusammenhang zwischen der 
+Auffällig ist, dass bei den ausgewählten Aufgaben scheinbar kein Zusammenhang zwischen der 
 Constraint-Konformitätsrate und der Sollwertvaliditätsrate besteht. Bei Problem 5 lag die 
-Constraint-Konformitätsrate mit \(46{,}66\,\%\) deutlich unter dem Durchschnitt, die Sollwertvaliditätsrate 
+Constraint-Konformitätsrate mit \(46{,}67\,\%\) deutlich unter dem Durchschnitt, die Sollwertvaliditätsrate 
 der generierten Testfälle zu diesem Problem lag jedoch bei \(100\,\%\). 
-Andersrum lag die Constraint-Konformitätsrate bei Problem 2 bei \(100\,\%\) und die Sollwertvaliditätsrate 
-nur bei \(46{,}66\,\%\). Die Untersuchung deutet folglich darauf hin, dass eine geringe Constraint-Konformitätsrate 
+Umgekehrt lag die Constraint-Konformitätsrate bei Problem 2 bei \(100\,\%\) und die Sollwertvaliditätsrate 
+nur bei \(46{,}67\,\%\). Die Untersuchung deutet folglich darauf hin, dass eine geringe Constraint-Konformitätsrate 
 nicht zwangsläufig eine geringe Sollwertvaliditätsrate impliziert und umgekehrt.
 
-Insbesondere die 8 falsch erzeugten Testfälle für Problem 5 scheinen bezüglich der Constraint-Konformität bemerkenswert. 
-Trotz eines klar begrenzten Wertebereiches von 1 bis \(10^9\), enthielten über die Hälfte der generierten Testfälle den Wert 0. 
+Insbesondere die acht constraint-widrigen Testfälle für Problem 5 scheinen bemerkenswert. 
+Trotz eines klar begrenzten Wertebereichs von 1 bis \(10^9\) enthielten über die Hälfte der generierten Testfälle den Wert 0. 
 Dieses Muster könnte darauf zurückzuführen sein, dass der Wert 0 häufig bei der Bildung von Grenz- und Sonderfällen Anwendung findet. 
-In diesem Fall wurde das Grenzfallmuster jedoch fehlerhaft auf eine Aufagabe angewandt, deren Aufgabenbeschreibung diesen Fall eindeutig 
+In diesem Fall wurde das Grenzfallmuster jedoch fehlerhaft auf eine Aufgabe angewandt, deren Aufgabenbeschreibung diesen Fall eindeutig 
 und explizit ausschließt.
 
 Die Analyse der Sollwertfehler ergibt eine starke Konzentration der fehlerhaften Erwartungswerte auf Problem 2, 
 welche gegen eine rein zufällige Verteilung spricht. 
-Die Validität scheint von der komplexität der semantischen Anforderungen der jeweiligen Aufgabe
+Die Validität scheint von der Komplexität der semantischen Anforderungen der jeweiligen Aufgabe
 abzuhängen. Damit ist die Schwierigkeit gemeint, die in der Aufgabenbeschreibung formulierten Regeln korrekt 
 zu interpretieren und in ihrer Kombination auf einen konkreten Eingabefall anzuwenden.
 Einfache bitweise, kumulative oder partitionierende Operationen wurden in der Stichprobe zuverlässig behandelt, während die
 mehrstufige Sortierregel mit positionsabhängiger Tie-Break-Bedingung in Problem 2 deutlich häufiger zu falschen Erwartungen führte. 
-Maßgeblich für die Sollwertvalidität scheint somit nicht die die rechnerische Schwierigkeit einer Aufgabe zu sein sondern die Anzahl, 
+Maßgeblich für die Sollwertvalidität scheint somit nicht die rechnerische Schwierigkeit einer Aufgabe zu sein, sondern die Anzahl, 
 Abhängigkeit und sprachliche Eindeutigkeit der anzuwendenden Regeln.
 
-Der einzelne Sollwertfehler bei Problem 3 ist insofern interessant, als das bei vergleichbaren Testfällen zu selbiger Aufgabe keine fehlerhaften Werte für das erwartete 
+Der einzelne Sollwertfehler bei Problem 3 ist insofern interessant, als dass bei vergleichbaren Testfällen zu der selben Aufgabe keine fehlerhaften Werte für das erwartete 
 Ergebnis auftraten. 
 Aus der Untersuchung lässt sich hierfür keine eindeutige Ursache ableiten. Am ehesten kann der Fehler daher als Veranschaulichung der zuvor beschriebenen Funktionsweise 
 von Large Language Models interpretiert werden. Die erzeugte Tokenfolge basiert auf Wahrscheinlichkeitsverteilungen und nicht auf einer garantierten logischen Herleitung. 
@@ -146,19 +146,19 @@ Dadurch können auch bei ähnlichen Eingaben vereinzelt fehlerhafte Ausgaben ent
 Nach der Untersuchung der Testfallvalidität wird im zweiten Auswertungsschritt geprüft, ob die
 generierten Testfälle tatsächlich dazu geeignet sind, fehlerhafte Implementierungen zu
 erkennen. Dafür wurden die generierten Testfälle mit einer gezielt fehlerhaften Lösung ausgeführt. 
-Die fehlerhaften Implementierungen zeichnen sich dadurch aus das sie einen vorab bekannten Defekt enthalten, 
+Die fehlerhaften Implementierungen zeichnen sich dadurch aus, dass sie einen vorab bekannten Defekt enthalten, 
 welcher jedoch nur bei bestimmten Eingaben zu einem abweichenden Ergebnis führt.
-Die Ergenbisse dieser Ausführung sowie die fehlerhaften Implementierungen können ebenfalls der Anlage \(test-results.md\) entnommen werden.
-Ein Testfall erkennt eine falsche Implementierungen, wenn das indem Testfall definierte erwartete Ergebnis 
-von dem Ergebnis nach Ausführung abweicht. Für diese Analyse werden ausschließlich Testfälle berücksichtigt 
-welche zuvor als Valide klassifiziert wurden. 
+Die Ergebnisse dieser Ausführung sowie die fehlerhaften Implementierungen können ebenfalls der Anlage \texttt{test-results.md} entnommen werden.
+Ein Testfall erkennt eine falsche Implementierung, wenn das in dem Testfall definierte erwartete Ergebnis 
+von dem Ergebnis nach Ausführung abweicht. Für diese Analyse werden ausschließlich Testfälle berücksichtigt, 
+welche zuvor als valide klassifiziert wurden. 
 
 \subsubsection{Ergebnisse der Fehlererkennung}
 Von den 86 validen Testfällen führen 13 bei einer fehlerhaften Implementierung zu einem vom
-Sollwert abweichenden Ergebnis. Tabelle~\ref{tab:fehlererkennung-probleme} zeigt, das sich die 
+Sollwert abweichenden Ergebnis. Tabelle~\ref{tab:fehlererkennung-probleme} zeigt, dass sich die 
 13 Testfälle so auf die einzelnen Aufgaben aufteilen, dass sechs der sieben fehlerhaften Implementierungen 
 durch mindestens einen validen Testfall erkannt werden. Dies entspricht einer Erkennungsrate von rund
-\(85,71\,\%\). Nur für Problem~5 wurde durch das LLM kein valider Testfall erzeugt, der den eingebauten
+\(85{,}71\,\%\). Nur für Problem~5 wurde durch das LLM kein valider Testfall erzeugt, der den eingebauten
 Fehler sichtbar macht.
 
 \begin{table}[htbp]
@@ -191,19 +191,19 @@ Fehler sichtbar macht.
 Bei der Analyse der Ergebnisse zur Fehlererkennung fällt zunächst auf, dass im Durchschnitt bei jeweils 
 15 Testfällen pro Programmieraufgabe nur 1,86 Testfälle erzeugt wurden, welche die fehlerhafte Implementierung
 erkennen. Dieses Ergebnis scheint auf den ersten Blick niedrig, da im System-Prompt explizit darauf verwiesen wurde, 
-insbsondere solche Testfälle mit einzubeziehen. Hierbei darf jedoch nicht außeracht gelassen werden, das die verwendeten 
+insbesondere solche Testfälle mit einzubeziehen. Hierbei darf jedoch nicht außer Acht gelassen werden, dass die verwendeten 
 Fehlerimplementierungen häufig genau durch ein Eingabemuster entlarvt werden. Aus dieser Sichtweise wäre ein Ergebnis von 
 einem fehlererkennenden Testfall pro Aufgabe als optimal zu bewerten, da das LLM so nicht weitere Testfälle für den gleichen 
-Sonderfall verwendet. Außerdem muss berücksichtigt werden, das nicht ausgeschlossen werden kann, dass unter den verbleibenen 
+Sonderfall verwendet. Außerdem muss berücksichtigt werden, dass nicht ausgeschlossen werden kann, dass unter den verbleibenden 
 Testfällen nicht solche dabei sind, die möglicherweise andere, von dem LLM antizipierte Fehlerimplementierungen, identifizieren 
 würden.
 
 Die Analyse der Fehlererkennung gepaart mit der zur Validitätsrate impliziert außerdem einen weiteren interessanten Zusammenhang.
-Auffällig ist das für Problem 2 ein Testfall generiert wurde welcher die falsche Lösung erkennt, obwohl das LLM zuvor Schwierigkeiten 
-damit hatte die korrekten Sollwerte für die eigens generierten Testfälle zu antizipieren. Auf der anderen Seite wurde für Problem 5 kein 
-Testfall generiert der die falsche Implementierung erkennen konnte. Hier hatte das LLM vorab Probleme die mitgegebenen Eingabebeschränkungen 
-(Constraints) zu befolgen, konnte aber die Sollwerte der Testfälle zu \(100\,\%\) korrekt vorhersagen. Diese Beobachtung schlägt vor, dass 
-die Generierung fehlerekennender Testfälle weniger von der semantischen Komplexität der Aufgabenstellung, sondern mehr vom Verständnis der 
-vorgegebenen Eingabebeschränkung abhängt.
+Auffällig ist, dass für Problem 2 ein Testfall generiert wurde, der die falsche Lösung erkennt, obwohl das LLM zuvor Schwierigkeiten 
+damit hatte, die korrekten Sollwerte für die eigens generierten Testfälle zu antizipieren. Auf der anderen Seite wurde für Problem 5 kein 
+Testfall generiert, der die falsche Implementierung erkennen konnte. Hier hatte das LLM vorab Probleme die mitgegebenen Eingabebeschränkungen 
+(Constraints) zu befolgen, konnte aber die Sollwerte der Testfälle zu \(100\,\%\) korrekt vorhersagen. Diese Beobachtung legt für die untersuchte 
+Stichprobe nahe, dass die Generierung fehlererkennender Testfälle weniger von der semantischen Komplexität der Aufgabenstellung, sondern mehr 
+vom Verständnis der vorgegebenen Eingabebeschränkung abhängt.
 
 \newpage

@@ -4,30 +4,30 @@
 Der Bereich des Software-Testings beschäftigt sich damit, Systeme und Programme 
 auf ihre Korrektheit, Funktionalität, Vollständigkeit, Sicherheit und generelle Qualität 
 zu überprüfen und gilt dabei als wesentliche Voraussetzung für die 
-Qualität und Zuverlässigkeit von Softwareprodukten \cite{ehmer_comparative_2012} \cite{wang_software_2024}.
+Qualität und Zuverlässigkeit von Softwareprodukten \cite{ehmer_comparative_2012, wang_software_2024}.
 Allgemeiner formuliert besteht das Ziel von Software-Testing darin, 
 Abweichungen zwischen dem spezifizierten und dem tatsächlichen Verhalten eines Systems zu 
 identifizieren. Programme werden also unter festgelegten Bedingungen ausgeführt, wodurch 
 geprüft werden kann, ob die vorab definierten Anforderungen erfüllt werden oder ob Fehler 
 auftreten.
 
-Konzeptionell lassen sich die verschiedene Arten und Techniken zum testen von Software in zwei Kategorien 
-einteilen, dem White-Box-Testing und dem Black-Box-Testing \cite{nidhra_black_2012}. Für das White-Box-Testing benötigt 
+Konzeptionell lassen sich die verschiedenen Arten und Techniken zum Testen von Software in die Kategorien White-Box-Testing 
+und Black-Box-Testing einteilen \cite{nidhra_black_2012}. Für das White-Box-Testing benötigt 
 der Tester und Testfallersteller Zugang zum Quellcode des Programms. Die Tests überprüfen primär die 
 interne Logik und Struktur des Codes, indem Funktionen mit unterschiedlichen Parametern ausgeführt werden, um 
 möglichst viele logische Pfade im Programmablauf auf ihre Funktionalität untersuchen zu können \cite{verma_comparative_2017}.
 
-Das Black-Box-Testing oder auch Functional-Testing genannt, behandelt den Quellcode des zu testenden Programms 
+Das Black-Box-Testing, auch Functional Testing genannt, behandelt den Quellcode des zu testenden Programms 
 hingegen wie eine undurchsichtige Box, deren Inhalt nicht bekannt ist und auch nicht bekannt sein soll. 
 Ohne Wissen über die internen Abläufe werden Testfälle und erwartete Ergebnisse nur aus Spezifikationen 
 oder Beschreibungen über das gewünschte Verhalten eines Programms abgeleitet \cite{verma_comparative_2017}. Auf Basis dieser 
-Testfälle wird anschließend geprüft ob das Programm die definierte Funktionalität erfüllt.
+Testfälle wird anschließend geprüft, ob das Programm die definierte Funktionalität erfüllt.
 
-Gerade beim Black-Box-Testing hängt die Qualität eines Testprozesse maßgeblich von der Auswahl geeigneter Testfälle ab. 
+Gerade beim Black-Box-Testing hängt die Qualität eines Testprozesses maßgeblich von der Auswahl geeigneter Testfälle ab. 
 Nach der Definition des International Software Testing Qualifications Board besteht ein Testfall primär aus Vorbedingungen, 
-Eingaben, gegebenenfalls auszuführende Aktionen, erwartete Ergebnisse und Nachbedingungen \cite{istqb_testfall}. 
-Für die in dieser Projektarbeit betrachteten algorithmischen Programmieraufgabe lässt sich die allgemeine Definition 
-vereinfachen. Jede Aufgabe defniert festgelgte Parameter und Rückgabewerte, somit besteht ein Testfall immer aus einer 
+Eingaben, gegebenenfalls auszuführenden Aktionen, erwarteten Ergebnissen und Nachbedingungen \cite{istqb_testfall}. 
+Für die in dieser Projektarbeit betrachteten algorithmischen Programmieraufgaben lässt sich die allgemeine Definition 
+vereinfachen. Jede Aufgabe definiert festgelegte Parameter und Rückgabewerte. Somit besteht ein Testfall immer aus einer 
 konkreten Eingabe und dem dazugehörigen erwarteten Ergebnis. Das erwartete Ergebnis beschreibt das Verhalten, 
 das gemäß Spezifikation bei den jeweiligen Testfällen eintreten soll \cite{istqb_erwartetes_ergebnis}.
 
@@ -49,48 +49,47 @@ Vor diesem Hintergrund erscheint es besonders relevant zu untersuchen, wie zuver
 LLM Testfälle ausschließlich aus der natürlichsprachlichen Spezifikation ableiten 
 kann, ohne Zugriff auf die konkrete Implementierung zu erhalten.
 
-Gerade aus diesem Grund ist für diese Untersuchung die Zweitligkeit eines Testfalls, bestehent aus Eingabe 
-und erwarteten Ergebnis besonders relevant. Beide Angaben werden von dem verwendeten LLM 
-auf Basis einer natürlich sprachlichen Programmieraufgabe (Spezifikation des Soll-Verahltens) erzeugt.
-Die empirische Forschung zeigt jedoch, dass die Korrektheit von dem
-LLM-generierten erwarteten Ergenis je nach Aufgabe und Untersuchungsaufbau deutlich variieren kann
+Gerade aus diesem Grund ist für diese Untersuchung die Zweiteiligkeit eines Testfalls, bestehend aus Eingabe 
+und erwartetem Ergebnis besonders relevant. Beide Angaben werden von dem verwendeten LLM 
+auf Basis einer natürlichsprachlichen Programmieraufgabe (Spezifikation des Sollverahltens) erzeugt.
+Die empirische Forschung zeigt jedoch, dass die Korrektheit des vom 
+LLM generierten erwarteten Ergenisses je nach Aufgabe und Untersuchungsaufbau deutlich variieren kann
 \cite{wang_software_2024}. Die Korrektheit hängt davon ab, wie gut das Modell die Programmieraufgabe 
-verstanden hat und wie gut es damit in der Lage war das Soll-Ergebnis der eigenen Testfälle vorherzusagen.
+verstanden hat und wie gut es damit in der Lage war, das Soll-Ergebnis der eigenen Testfälle vorherzusagen.
 Ein KI-generierter Testfall wird in dieser Arbeit demnach erst als valide eingestuft, wenn die 
 Eingabe die jeweiligen Einschränkungen innerhalb der Programmieraufgabe erfüllt und das vom LLM 
-erwartete Ergebnis mit dem Ergebnis der korrkten Referenzimplementierung übereinstimmt. 
-Erst dann kann untersucht werden ob die Gruppe der validierten Testfällen auch dazu geeignet ist, 
-bewusst fehlerhafte Implementierungen identifizieren.
+erwartete Ergebnis mit dem Ergebnis der korrekten Referenzimplementierung übereinstimmt. 
+Erst dann kann untersucht werden, ob die Gruppe der validierten Testfälle auch dazu geeignet ist, 
+bewusst fehlerhafte Implementierungen zu identifizieren.
 
 \subsection{Large Language Models: Funktionsweise und Auswahl}
 Um einordnen zu können, weshalb ein Large Language Model sowohl geeignete Testfälle als auch fehlerhafte erwartete 
 Ergebnisse erzeugen kann, ist zunächst ein grundlegendes Verständnis seiner Funktionsweise erforderlich. 
 
 Moderne Large Language Models basieren überwiegend auf der von Vaswani et al. vorgestellten 
-Transorfmer-Architektur. Hierbei ermöglichen sogenannte Attention-Mechanismen unterschiedliche Stellen 
+Transformer-Architektur. Hierbei ermöglichen sogenannte Attention-Mechanismen unterschiedliche Stellen 
 in einer sprachlichen Sequenz miteinander in Beziehung zu setzen \cite{vaswani_attention_nodate}. 
-Auf dieses Projekt bezogen, können somit Zusammenhänge zwischen den Bedingungen einer natürlich 
-sprachlichen Programmieraufgaben, den darin definierten Eingabegrenzen und dem geforderten 
+Auf dieses Projekt bezogen, können somit Zusammenhänge zwischen den Bedingungen einer natürlichsprachlichen 
+Programmieraufgaben, den darin definierten Eingabegrenzen und dem geforderten 
 Rückgabewert modelliert und als Kontext während der Generierung der Antwort verwendet werden.
 
 Die Ausgabe eines Sprachmodells wird schrittweise in sogenannten Tokens erzeugt. Tokens stellen abhängig von der verwendeten 
-Tokenisierung vollständige Wörter oder Wordteile dar. Auf Basis der Eingabe und der bereits generierten Tokens berechnet 
+Tokenisierung vollständige Wörter oder Wortteile dar. Auf Basis der Eingabe und der bereits generierten Tokens berechnet 
 das Modell eine Wahrscheinlichkeitsverteilung für das jeweils nächste Token \cite{vaswani_attention_nodate}. 
 Die Ausgabe eines generativen Sprachmodells stellt folglich keine bewiesen richtigen Fakten dar. 
-Das Modell generiert eine sprachlich und strukturell wahrscheinliche Fortsetzung der bisher 
-verarbeiteten Tokens und dem gesammelten Kontext. Bezogen auf die Generierung von Testfällen erklärt 
-dieses Verhalten, warum das Modell die Bedingungen und Vorgaben innerhalb einer Programmieraufgaben 
+Das Modell generiert eine sprachlich und strukturell wahrscheinliche Fortsetzung auf Grundlage der bisher verarbeiteten 
+Tokens und des gesammelten Kontexts. Bezogen auf die Generierung von Testfällen erklärt 
+dieses Verhalten, warum das Modell die Bedingungen und Vorgaben innerhalb einer Programmieraufgabe 
 zwar in Verbindung setzen und als Kontext in die Ausgabe mit einfließen lassen kann, es jedoch nicht 
 garantiert ist, dass die Ausgabe alle Vorgaben befolgt und fachlich korrekt ist \cite{huang_survey_2025}.  
 
-Für die Umsetzung des zu dieser dieser Projektarbeit zugehörigen Assistenzsystems wird das von OpenAI bereitgestellte 
+Für die Umsetzung des zu dieser Projektarbeit zugehörigen Assistenzsystems wird das von OpenAI bereitgestellte 
 Modell GPT-4.1 mini verwendet. Die Wahl dieses Modells 
 beruht auf einem Kompromiss zwischen Leistungsfähigkeit, Antwortgeschwindigkeit und Nutzungskosten. 
 Die Auswahl eines Mini-Modells ist bei der Auswertung und Interpretation der Ergebnisse zu beachten. 
-Die Untersuchung zielt nicht darauf ab die generell bestmögliche Testqualität eines aktuellen Sprachmodells zu erzielen. 
-Vielmehr wird untersucht, welche Qualität mit der
-konkreten Kombination aus GPT-4.1 mini, System-Prompt bei den untersuchten Programmieraufgaben
-erreicht wird.
+Die Untersuchung zielt nicht darauf ab, die generell bestmögliche Testqualität eines aktuellen Sprachmodells zu erzielen. 
+Vielmehr wird untersucht, welche Qualität mit der konkreten Kombination aus dem Modell GPT-4.1 mini und dem verwendeten System-Prompt 
+bei den untersuchten Programmieraufgaben erreicht wird.
 
 \newpage
 
