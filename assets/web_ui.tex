@@ -1,19 +1,32 @@
 \clearpage
 \begin{landscape}
+\thispagestyle{empty}
+
+\AddToShipoutPictureFG*{%
+    \AtPageLowerLeft{%
+        \put(
+            \LenToUnit{\dimexpr\paperwidth-1cm\relax},
+            \LenToUnit{0.5\paperheight}
+        ){%
+            \rotatebox{90}{%
+                \makebox(0,0){\thepage}%
+            }%
+        }%
+    }%
+}
 
 \section{User Interface der Webanwendung}
-\label{anhang:web-ui}
 
-\centering
-
-\includegraphics[
-    width=0.95\linewidth,
-    height=0.78\textheight,
-    keepaspectratio
-]{assets/web_ui.png}
-
-\captionof{figure}{User Interface der Webanwendung}
-\label{fig:web-ui}
+\begin{figure}[H]
+    \centering
+    \includegraphics[
+        width=0.95\linewidth,
+        height=0.78\textheight,
+        keepaspectratio
+    ]{assets/web_ui.png}
+    \caption{User Interface der Webanwendung}
+    \label{fig:web-ui}
+\end{figure}
 
 \end{landscape}
 \clearpage

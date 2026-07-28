@@ -1,20 +1,23 @@
 # ToDo
 Seitenangaben zu Quellen hinzufügen und Quellen clean machen!
-API-Key löschen wenn Noten da sind - Prof irgendwie darüber informieren?
 
-Schlechte Seitenumbrüche beheben.
-
-Wortanzahl durch KI genau ermitteln lassen und auf Deckblatt schreiben!
+Abkürzungsverzeichnis füllen.
 
 In Fazit vielleicht doch nochmal die Ergebnisse der Untersuchung (Zahlen) nennen 
 und vielleicht noch auf Unabhängigkeit zwischen Code und Testfallgenerierung eingehen.
 
-Bei den generierten Testfällen im Anhang vielleicht alle falschen rot markieren?! 
+Bei den generierten Testfällen im Anhang alle falschen rot und orange markieren je nach Fehlerart und alle 
+entlarvenden grün markieren.
 
-Abkürzungsverzeichnis füllen.
+Wortanzahl durch KI genau ermitteln lassen und auf Deckblatt schreiben!
+
+Schlechte Seitenumbrüche beheben - Erst wenn alles final ist!
+
+PDF so erzeugen das hotlinks noch verwendbar sind. Und PDF auch komplett neu bauen lassen!
+
 Source code mit Kommentaren füllen - Kommentare überprüfen.
 Anleitung zum starten der Anwendung in die Zusatzdokumente.
-PDF so erzeugen das hotlinks noch verwendbar sind. Und PDF auch komplett neu bauen lassen!
+API-Key löschen wenn Noten da sind - Prof irgendwie darüber informieren?
 
 Zip-Aufbau:
 Anlagen 

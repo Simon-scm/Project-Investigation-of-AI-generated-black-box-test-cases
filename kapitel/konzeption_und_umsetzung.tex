@@ -26,7 +26,7 @@ Abbildung~\ref{fig:architektur} stellt wiederum den technischen Aufbau des Assis
 \end{figure}
 
 Die Anwendung besteht aus einem mit Python und dem Framework FastAPI \cite{fastapi_documentation}
-realisierten Backend sowie einer mit HTML, CSS und JavaScript umgesetzten Benutzeroberfläche (Anhang~\ref{anhang:web-ui}). Beide Bestandteile werden gemeinsam innerhalb eines Serverprozesses 
+realisierten Backend sowie einer mit HTML, CSS \cite{openai_sol_2026} und JavaScript umgesetzten Benutzeroberfläche (Anhang~\ref{anhang:web-ui}). Beide Bestandteile werden gemeinsam innerhalb eines Serverprozesses 
 betrieben. Über die Route \texttt{GET /} stellt das Backend die statischen Dateien der Benutzeroberfläche bereit und liefert sie an den Browser aus.
 Die Benutzeroberfläche ermöglicht die Eingabe einer natürlichsprachlichen Programmieraufgabe und sendet diese anschließend über eine HTTP-POST-Anfrage an 
 den Endpunkt \texttt{POST /api}. Dort befindet sich die serverseitige Logik zur Verarbeitung der Anfrage und zur Generierung der Testfälle. Der Endpunkt übermittelt 

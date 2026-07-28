@@ -52,6 +52,19 @@
 \renewcommand{\footrulewidth}{0pt}
 
 % -------------------------------------------------
+% Landscape Pages
+% -------------------------------------------------
+\usepackage{float}
+\usepackage{pdflscape}
+\usepackage{eso-pic}
+\fancypagestyle{landscape}{
+    \fancyhf{}
+    \fancyfoot[C]{\thepage}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
+}
+
+% -------------------------------------------------
 % Absatzformat
 % -------------------------------------------------
 \setlength{\parindent}{0pt}
@@ -68,6 +81,7 @@
 % -------------------------------------------------
 % Abbildungen & Tabellen
 % -------------------------------------------------
+\usepackage{xcolor}
 \usepackage{graphicx}
 \usepackage{caption}
 \captionsetup{font=small}

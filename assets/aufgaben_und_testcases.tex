@@ -80,9 +80,12 @@ s consists of lowercase English letters
 \end{lstlisting}
 
 \subsubsection*{Generierte Testfälle}
-\begin{lstlisting}[style=appendixdata]
+\begin{lstlisting}[
+    style=appendixdata,
+    escapeinside={(*@}{@*)}
+]
 {
-  "test1": {"s": "leetcode", "expected": "leetcedo"},
+  (*@\mbox{\textcolor{red}{\ttfamily\detokenize{"test1": {"s": "leetcode", "expected": "leetcedo"},}}}@*)
   "test2": {"s": "aeiou", "expected": "aeiou"},
   "test3": {"s": "aabbccddeeiioouu", "expected": "aabbccddeeiioouu"},
   "test4": {"s": "uauaueiouaeiou", "expected": "uuaaaeeiiouou"},
