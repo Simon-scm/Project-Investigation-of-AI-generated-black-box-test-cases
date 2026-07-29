@@ -32,11 +32,11 @@ konkreten Eingabe und dem dazugehörigen erwarteten Ergebnis. Das erwartete Erge
 das gemäß Spezifikation bei den jeweiligen Testfällen eintreten soll \cite{istqb_erwartetes_ergebnis}.
 
 
-\subsection{KI-gestützte Testfallgenerierung}
+\subsection{\acs{KI}-gestützte Testfallgenerierung}
 Diese Projektarbeit baut wesentlich auf dem Konzept des Black-Box-Testings auf. Vor dem Hintergrund, 
 dass Large Language Models zunehmend zur Generierung von Quellcode eingesetzt werden, liegt es nahe, 
 sie zugleich auch Tests und Testfälle erstellen zu lassen.
-So werden LLMs inzwischen auch für die Vorbereitung von
+So werden Large Language Models (\acs{LLM})\acused{LLM} inzwischen auch für die Vorbereitung von
 Testfällen, die Erzeugung von Unit-Tests und Testorakeln sowie die Generierung von Eingaben für
 Systemtests verwendet \cite{wang_software_2024}.
 Dabei entsteht jedoch ein methodisches Risiko, wenn die Implementierung und Tests durch dasselbe 
@@ -46,18 +46,18 @@ Ergebnissen generiert, die auf derselben Fehlinterpretation beruhen. In diesem F
 nicht das ursprünglich geforderte Verhalten prüfen, sondern lediglich bestätigen, dass der erzeugte 
 Code konsistent mit der eigenen, möglicherweise fehlerhaften Auslegung der Aufgabe ist \cite{caridad_modelinversion_2026}. 
 Vor diesem Hintergrund erscheint es besonders relevant zu untersuchen, wie zuverlässig ein 
-LLM Testfälle ausschließlich aus der natürlichsprachlichen Spezifikation ableiten 
+\ac{LLM} Testfälle ausschließlich aus der natürlichsprachlichen Spezifikation ableiten 
 kann, ohne Zugriff auf die konkrete Implementierung zu erhalten.
 
 Gerade aus diesem Grund ist für diese Untersuchung die Zweiteiligkeit eines Testfalls, bestehend aus Eingabe 
-und erwartetem Ergebnis besonders relevant. Beide Angaben werden von dem verwendeten LLM 
+und erwartetem Ergebnis besonders relevant. Beide Angaben werden von dem verwendeten \ac{LLM} 
 auf Basis einer natürlichsprachlichen Programmieraufgabe (Spezifikation des Sollverahltens) erzeugt.
 Die empirische Forschung zeigt jedoch, dass die Korrektheit des vom 
-LLM generierten erwarteten Ergenisses je nach Aufgabe und Untersuchungsaufbau deutlich variieren kann
+\ac{LLM} generierten erwarteten Ergenisses je nach Aufgabe und Untersuchungsaufbau deutlich variieren kann
 \cite{wang_software_2024}. Die Korrektheit hängt davon ab, wie gut das Modell die Programmieraufgabe 
 verstanden hat und wie gut es damit in der Lage war, das Soll-Ergebnis der eigenen Testfälle vorherzusagen.
-Ein KI-generierter Testfall wird in dieser Arbeit demnach erst als valide eingestuft, wenn die 
-Eingabe die jeweiligen Einschränkungen innerhalb der Programmieraufgabe erfüllt und das vom LLM 
+Ein \ac{KI}-generierter Testfall wird in dieser Arbeit demnach erst als valide eingestuft, wenn die 
+Eingabe die jeweiligen Einschränkungen innerhalb der Programmieraufgabe erfüllt und das vom \ac{LLM} 
 erwartete Ergebnis mit dem Ergebnis der korrekten Referenzimplementierung übereinstimmt. 
 Erst dann kann untersucht werden, ob die Gruppe der validierten Testfälle auch dazu geeignet ist, 
 bewusst fehlerhafte Implementierungen zu identifizieren.
@@ -68,14 +68,14 @@ Ergebnisse erzeugen kann, ist zunächst ein grundlegendes Verständnis seiner Fu
 
 Moderne Large Language Models basieren überwiegend auf der von Vaswani et al. vorgestellten 
 Transformer-Architektur. Hierbei ermöglichen sogenannte Attention-Mechanismen unterschiedliche Stellen 
-in einer sprachlichen Sequenz miteinander in Beziehung zu setzen \cite{vaswani_attention_nodate}. 
+in einer sprachlichen Sequenz miteinander in Beziehung zu setzen \cite{vaswani_attention_2017}. 
 Auf dieses Projekt bezogen, können somit Zusammenhänge zwischen den Bedingungen einer natürlichsprachlichen 
 Programmieraufgaben, den darin definierten Eingabegrenzen und dem geforderten 
 Rückgabewert modelliert und als Kontext während der Generierung der Antwort verwendet werden.
 
 Die Ausgabe eines Sprachmodells wird schrittweise in sogenannten Tokens erzeugt. Tokens stellen abhängig von der verwendeten 
 Tokenisierung vollständige Wörter oder Wortteile dar. Auf Basis der Eingabe und der bereits generierten Tokens berechnet 
-das Modell eine Wahrscheinlichkeitsverteilung für das jeweils nächste Token \cite{vaswani_attention_nodate}. 
+das Modell eine Wahrscheinlichkeitsverteilung für das jeweils nächste Token \cite{vaswani_attention_2017}. 
 Die Ausgabe eines generativen Sprachmodells stellt folglich keine bewiesen richtigen Fakten dar. 
 Das Modell generiert eine sprachlich und strukturell wahrscheinliche Fortsetzung auf Grundlage der bisher verarbeiteten 
 Tokens und des gesammelten Kontexts. Bezogen auf die Generierung von Testfällen erklärt 
@@ -84,11 +84,11 @@ zwar in Verbindung setzen und als Kontext in die Ausgabe mit einfließen lassen 
 garantiert ist, dass die Ausgabe alle Vorgaben befolgt und fachlich korrekt ist \cite{huang_survey_2025}.  
 
 Für die Umsetzung des zu dieser Projektarbeit zugehörigen Assistenzsystems wird das von OpenAI bereitgestellte 
-Modell GPT-4.1 mini verwendet. Die Wahl dieses Modells 
+Modell \acs{GPT}-4.1 mini verwendet. Die Wahl dieses Modells 
 beruht auf einem Kompromiss zwischen Leistungsfähigkeit, Antwortgeschwindigkeit und Nutzungskosten. 
 Die Auswahl eines Mini-Modells ist bei der Auswertung und Interpretation der Ergebnisse zu beachten. 
 Die Untersuchung zielt nicht darauf ab, die generell bestmögliche Testqualität eines aktuellen Sprachmodells zu erzielen. 
-Vielmehr wird untersucht, welche Qualität mit der konkreten Kombination aus dem Modell GPT-4.1 mini und dem verwendeten System-Prompt 
+Vielmehr wird untersucht, welche Qualität mit der konkreten Kombination aus dem Modell \acs{GPT}-4.1 mini und dem verwendeten System-Prompt 
 bei den untersuchten Programmieraufgaben erreicht wird.
 
 \newpage
