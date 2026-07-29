@@ -1,5 +1,4 @@
 # ToDo
-Abkürzungsverzeichnis füllen.
 
 In Fazit vielleicht doch nochmal die Ergebnisse der Untersuchung (Zahlen) nennen 
 und vielleicht noch auf Unabhängigkeit zwischen Code und Testfallgenerierung eingehen.

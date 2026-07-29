@@ -1,5 +1,7 @@
 \section{Fazit}
-Die Untersuchung zeigt, dass Large Language Models aus natürlichsprachlichen
+Die Untersuchung ergab, dass 86 von 105 generierten Testfällen unmittelbar nutzbar waren und 
+sechs der sieben untersuchten fehlerhaften Implementierungen erkannt werden konnten.
+Dieses Ergebnis zeigt, dass Large Language Models aus natürlichsprachlichen
 Programmieraufgaben grundsätzlich geeignete Black-Box-Testfälle ableiten können. 
 Auf Basis der Analyse kann die Forschungsfrage damit dahingehend beantwortet werden, 
 dass ein \ac{LLM} die Testfallerstellung wirksam unterstützen kann, die erzeugten Ergebnisse 
@@ -15,7 +17,9 @@ Testsammlung zu verstehen und nicht als Ersatz für eine fachliche Kontrolle.
 
 Für weiterführende Untersuchungen könnte das Experiment mit mehr Programmieraufgaben, mehreren
 falschen Lösungen pro Aufgabe und wiederholten Generierungsdurchläufen durchgeführt werden.
-Zusätzlich könnten unterschiedliche Modelle und Promptvarianten verglichen werden. Außerdem 
+Zusätzlich könnten unterschiedliche Modelle und Promptvarianten verglichen werden. Dabei sollte
+auch untersucht werden, ob getrennte Modelle für die Code- und Testfallgenerierung die
+Unabhängigkeit der Prüfung erhöhen und gleichartige Fehlinterpretationen reduzieren. Außerdem 
 wäre es hilfreich, das \ac{LLM} zu jeder Testfallgenerierung eine kurze Argumentation ausgeben zu lassen, 
 um dessen Vorgehen nachvollziehbarer zu machen. Mittels dieser Erweiterungen könnten tiefere Einblicke 
 in mögliche Zusammenhänge zwischen Validitäts- und Fehlererkennungsrate gewonnen und potenziell 

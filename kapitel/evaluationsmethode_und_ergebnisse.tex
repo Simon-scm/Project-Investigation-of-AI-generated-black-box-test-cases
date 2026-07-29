@@ -10,11 +10,11 @@ Die korrekten Referenzimplementierungen sowie die falschen Lösungen zu den aufg
 wurden auf der LeetCode-Plattform eingereicht und gegenüber der dort vorhandenen Testsuite validiert. Dadurch liegt für jede Programmieraufgabe eine geprüft korrekte Lösung vor, 
 die im weiteren Verlauf dieser Untersuchung als Vergleichsgrundlage für die Validierung der \ac{KI}-generierten erwarteten Ergebnisse dient. 
 
-Die hier als bewusst fehlerhaft verwendeten Lösungen basieren ebenfalls auf eigenen früheren Lösungsversuchen zu den jeweiligen Problemen. Für die Untersuchung ist das 
+Die bewusst fehlerhaften Lösungen basieren ebenfalls auf eigenen früheren Lösungsversuchen zu den jeweiligen Problemen. Für die Untersuchung ist das 
 vorteilhaft, da es sich nicht um künstlich konstruierte oder absichtlich eingebaute Fehler, sondern um tatsächliche, während des menschlichen Problemlösungsprozesses 
 entstandene Implementierungsfehler handelt. Diese falschen Lösungsversuche liefern für viele typische Testfälle das korrekte Ergebnis, scheitern jedoch an spezifischen Grenz- 
-oder Sonderfällen. Dadurch eignen sie sich besonders dafür zu überprüfen, wie gut die \ac{KI}-generierten Testfälle fehlerhafte Implementierungen entlarven.
-
+oder Sonderfällen. Dadurch eignen sie sich besonders dafür, zu überprüfen, wie gut die \ac{KI}-generierten Testfälle fehlerhafte Implementierungen entlarven.
+\clearpage
 \subsection{Validität der generierten Testfälle}
 Ein generierter Testfall kann aus zwei verschiedenen Gründen nicht valide sein. Seine Eingabewerte können außerhalb der in der
 Programmieraufgabe definierten Constraints liegen oder der vom Sprachmodell
@@ -48,12 +48,12 @@ Das Feld \texttt{matches-}\allowbreak\texttt{expected} im Ergebnisdatensatz gibt
 \subsubsection{Ergebnisse der Validitätsprüfung}
 Bei der manuellen Constraint-Prüfung konnten insgesamt zehn unzulässige
 Testfälle identifiziert werden. Davon entfielen zwei auf Problem 1 und die restlichen 
-acht auf Problem 5. Bei Problem 1 wurde mit \(n=2\,863\,311\,530\) ein Wert außerhalb des
+acht auf Problem 5. Bei Problem 1 wurden mit \(n=2\,863\,311\,530\) und \(n=0\) Werte außerhalb des
 erlaubten Bereichs \(1 \leq n \leq 2^{31}-1\) (2\,147\,483\,647) erzeugt. Bei Problem 5
 enthielten acht Testfälle mindestens einen Eingabewert 0, obwohl für alle drei
 Eingabevariablen positive Werte zwischen 1 und \(10^9\) durch die Beschränkungen 
 innerhalb der Aufgabenstellung vorgeschrieben waren.
-Damit erfüllten 95 von 105 Eingaben die in den Aufgaben gesetzten Eingabebeschränkungen, 
+Damit erfüllen 95 von 105 Testfällen die in den Aufgaben gesetzten Eingabebeschränkungen, 
 was einer Constraint-Konformitätsrate von 
 
 \[
@@ -109,10 +109,10 @@ Sollwertfehler in Testfall 12 auf. Die übrigen 14 zulässigen Testfälle
 wurden korrekt berechnet. Für alle anderen Probleme erreichten die von der \ac{KI} generierten Testfälle nach Entfernung
 unzulässiger Eingaben eine Sollwertvalidität von \(100\,\%\).
 
-\subsubsection{Interpretation der untersuchten Validitätsrate}
+\subsubsection{Interpretation der Validitätsergebnisse}
 Aus den Ergebnissen der Validitätsprüfung lassen sich erste interessante Schlüsse ziehen.
-Auffällig ist, dass bei den ausgewählten Aufgaben scheinbar kein Zusammenhang zwischen der 
-Constraint-Konformitätsrate und der Sollwertvaliditätsrate besteht. Bei Problem 5 lag die 
+Auffällig ist, dass innerhalbn der untersuchten Stichprobe kein Zusammenhang zwischen der 
+Constraint-Konformitätsrate und der Sollwertvaliditätsrate zu erkennen ist. Bei Problem 5 lag die 
 Constraint-Konformitätsrate mit \(46{,}67\,\%\) deutlich unter dem Durchschnitt, die Sollwertvaliditätsrate 
 der generierten Testfälle zu diesem Problem lag jedoch bei \(100\,\%\). 
 Umgekehrt lag die Constraint-Konformitätsrate bei Problem 2 bei \(100\,\%\) und die Sollwertvaliditätsrate 
@@ -127,15 +127,15 @@ und explizit ausschließt.
 
 Die Analyse der Sollwertfehler ergibt eine starke Konzentration der fehlerhaften Erwartungswerte auf Problem 2, 
 welche gegen eine rein zufällige Verteilung spricht. 
-Die Validität scheint von der Komplexität der semantischen Anforderungen der jeweiligen Aufgabe
-abzuhängen. Damit ist die Schwierigkeit gemeint, die in der Aufgabenbeschreibung formulierten Regeln korrekt 
+Diese Beobachtung legt die Vermutung nahe, dass die Validität von der Komplexität der semantischen Anforderungen der jeweiligen Aufgabe
+anhängt. Damit ist die Schwierigkeit gemeint, die in der Aufgabenbeschreibung formulierten Regeln korrekt 
 zu interpretieren und in ihrer Kombination auf einen konkreten Eingabefall anzuwenden.
 Einfache bitweise, kumulative oder partitionierende Operationen wurden in der Stichprobe zuverlässig behandelt, während die
 mehrstufige Sortierregel mit positionsabhängiger Tie-Break-Bedingung in Problem 2 deutlich häufiger zu falschen Erwartungen führte. 
 Maßgeblich für die Sollwertvalidität scheint somit nicht die rechnerische Schwierigkeit einer Aufgabe zu sein, sondern die Anzahl, 
 Abhängigkeit und sprachliche Eindeutigkeit der anzuwendenden Regeln.
 
-Der einzelne Sollwertfehler bei Problem 3 ist insofern interessant, als dass bei vergleichbaren Testfällen zu der selben Aufgabe keine fehlerhaften Werte für das erwartete 
+Der einzelne Sollwertfehler bei Problem 3 ist insofern interessant, als dass bei vergleichbaren Testfällen zu derselben Aufgabe keine fehlerhaften Werte für das erwartete 
 Ergebnis auftraten. 
 Aus der Untersuchung lässt sich hierfür keine eindeutige Ursache ableiten. Am ehesten kann der Fehler daher als Veranschaulichung der zuvor beschriebenen Funktionsweise 
 von Large Language Models interpretiert werden. Die erzeugte Tokenfolge basiert auf Wahrscheinlichkeitsverteilungen und nicht auf einer garantierten logischen Herleitung. 
@@ -147,9 +147,9 @@ Nach der Untersuchung der Testfallvalidität wird im zweiten Auswertungsschritt 
 generierten Testfälle tatsächlich dazu geeignet sind, fehlerhafte Implementierungen zu
 erkennen. Dafür wurden die generierten Testfälle mit einer gezielt fehlerhaften Lösung ausgeführt. 
 Die fehlerhaften Implementierungen zeichnen sich dadurch aus, dass sie einen vorab bekannten Defekt enthalten, 
-welcher jedoch nur bei bestimmten Eingaben zu einem abweichenden Ergebnis führt.
+der jedoch nur bei bestimmten Eingaben zu einem abweichenden Ergebnis führt.
 Die Ergebnisse dieser Ausführung sowie die fehlerhaften Implementierungen können ebenfalls der Anlage \texttt{test-results.md} entnommen werden.
-Ein Testfall erkennt eine falsche Implementierung, wenn das in dem Testfall definierte erwartete Ergebnis 
+Ein Testfall erkennt eine falsche Implementierung, wenn das im Testfall definierte erwartete Ergebnis 
 von dem Ergebnis nach Ausführung abweicht. Für diese Analyse werden ausschließlich Testfälle berücksichtigt, 
 welche zuvor als valide klassifiziert wurden. 
 
@@ -192,18 +192,18 @@ Bei der Analyse der Ergebnisse zur Fehlererkennung fällt zunächst auf, dass im
 15 Testfällen pro Programmieraufgabe nur 1,86 Testfälle erzeugt wurden, welche die fehlerhafte Implementierung
 erkennen. Dieses Ergebnis scheint auf den ersten Blick niedrig, da im System-Prompt explizit darauf verwiesen wurde, 
 insbesondere solche Testfälle mit einzubeziehen. Hierbei darf jedoch nicht außer Acht gelassen werden, dass die verwendeten 
-Fehlerimplementierungen häufig genau durch ein Eingabemuster entlarvt werden. Aus dieser Sichtweise wäre ein Ergebnis von 
-einem fehlererkennenden Testfall pro Aufgabe als optimal zu bewerten, da das \ac{LLM} so nicht weitere Testfälle für den gleichen 
+Fehlerimplementierungen häufig genau durch ein Eingabemuster entlarvt werden. Aus dieser Sicht wäre ein Ergebnis von 
+einem fehlererkennenden Testfall pro Aufgabe als ausreichend zu bewerten, da das \ac{LLM} so nicht weitere Testfälle für den gleichen 
 Sonderfall verwendet. Außerdem muss berücksichtigt werden, dass nicht ausgeschlossen werden kann, dass unter den verbleibenden 
-Testfällen nicht solche dabei sind, die möglicherweise andere, von dem \ac{LLM} antizipierte Fehlerimplementierungen, identifizieren 
+Testfällen solche dabei sind, die möglicherweise andere, von dem \ac{LLM} antizipierte Fehlerimplementierungen identifizieren 
 würden.
 
-Die Analyse der Fehlererkennung gepaart mit der zur Validitätsrate impliziert außerdem einen weiteren interessanten Zusammenhang.
+Die gemeinsame Betrachtung der Fehlererkennung und Validität zeigt außerdem einen weiteren interessanten Zusammenhang.
 Auffällig ist, dass für Problem 2 ein Testfall generiert wurde, der die falsche Lösung erkennt, obwohl das \ac{LLM} zuvor Schwierigkeiten 
 damit hatte, die korrekten Sollwerte für die eigens generierten Testfälle zu antizipieren. Auf der anderen Seite wurde für Problem 5 kein 
-Testfall generiert, der die falsche Implementierung erkennen konnte. Hier hatte das \ac{LLM} vorab Probleme die mitgegebenen Eingabebeschränkungen 
+Testfall generiert, der die falsche Implementierung erkennen konnte. Hier hatte das \ac{LLM} vorab Probleme, die mitgegebenen Eingabebeschränkungen 
 (Constraints) zu befolgen, konnte aber die Sollwerte der Testfälle zu \(100\,\%\) korrekt vorhersagen. Diese Beobachtung legt für die untersuchte 
-Stichprobe nahe, dass die Generierung fehlererkennender Testfälle weniger von der semantischen Komplexität der Aufgabenstellung, sondern mehr 
+Stichprobe die Vermutung nahe, dass die Generierung fehlererkennender Testfälle weniger von der semantischen Komplexität der Aufgabenstellung als 
 vom Verständnis der vorgegebenen Eingabebeschränkung abhängt.
 
 \newpage

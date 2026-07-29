@@ -2,17 +2,17 @@
 Das Erstellen von geeigneten Tests für Softwareprodukte stellt einen wichtigen Bestandteil der Qualitätssicherung dar. Mit ihnen wird überprüft, ob ein Programm
 das vorab definierte Verhalten korrekt umsetzt und auch bei Sonderfällen zuverlässig bleibt und die erwarteten Ergebnisse liefert. Gerade bei kurzen algorithmischen 
 Programmieraufgaben lässt sich häufig der Fall beobachten, dass eine falsche Implementierung für viele Standardfälle das korrekte Ergebnis liefert und nur 
-bei einzelnen speziellen Eingaben/Tests fehlschlägt.
+bei einzelnen speziellen Eingaben fehlschlägt.
 
 Da unterschiedliche fehlerhafte Lösungen zuverlässig erkannt werden müssen, stellt das Konzipieren geeigneter Testfälle im Bereich der Softwareentwicklung eine 
 anspruchsvolle Aufgabe dar. Angesichts des zunehmenden Einsatzes künstlicher Intelligenz (\acs{KI})\acused{KI} im Feld der Softwareentwicklung entsteht die Frage, ob mit Hilfe der künstlichen Intelligenz 
-nur Code erzeugt werden kann oder ob die Modelle auch in der Lage sind, geeignete Testfälle inklusive der erwarteten Ergebnisse, anhand von vorab definiertem Verhalten 
+nur Code erzeugt werden kann oder ob die Modelle auch in der Lage sind, geeignete Testfälle inklusive der erwarteten Ergebnisse anhand von vorab definiertem Verhalten 
 zu generieren.
 
 Das Ziel dieser Projektarbeit besteht darin, ein \ac{KI}-Assistenzsystem in Form einer Webanwendung zu entwickeln, welches Testfälle inklusive der erwarteten Ergebnisse 
 für natürlichsprachliche Programmieraufgaben ausgibt. Auf Basis dieser Anwendung wird anschließend anhand von sieben beispielhaften Aufgaben untersucht, wie valide die generierten 
 Testfälle sind und wie gut sie fehlerhafte Implementierungen einer Lösung erkennen. Wichtig hierbei ist, dass die \ac{KI} keinen Zugriff auf die Implementierungen selbst erhält und 
-die Testfälle somit ausschließlich auf Basis des beschriebenden Sollverhaltens innerhalb der Aufgabe abgeleitet werden. Daraus ergibt sich die folgende Forschungsfrage:
+die Testfälle somit ausschließlich auf Basis des beschriebenen Sollverhaltens innerhalb der Aufgabe abgeleitet werden. Daraus ergibt sich die folgende Forschungsfrage:
 
 \begin{center}
     \textit{Inwiefern können Large Language Models aus natürlichsprachlichen Programmieraufgaben valide Black-Box-Testfälle generieren, die zur Erkennung fehlerhafter Implementierungen 
@@ -21,8 +21,8 @@ geeignet sind?}
 
 Durch die Untersuchung soll herausgearbeitet werden, ob ein solches System als unterstützendes Werkzeug bei der Testfallerstellung eingesetzt werden kann und ob eine manuelle 
 fachliche Prüfung der generierten Testfälle erforderlich bleibt.
-
-Dafür werden zunächst die Grundlagen des Software-Testings und die Testfallgenerierung mithilfe von
+\clearpage
+Dafür werden zunächst die Grundlagen des Software-Testings und die Testfallgenerierung mit Hilfe von
 \ac{KI} erläutert. Dies schafft das fachliche Fundament für die spätere Bewertung der
 generierten Testfälle. Anschließend werden die Konzeption und technische Umsetzung des
 Assistenzsystems beschrieben, um herauszustellen, wie die theoretischen Anforderungen in einen

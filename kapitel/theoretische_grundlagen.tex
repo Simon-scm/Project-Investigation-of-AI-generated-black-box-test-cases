@@ -12,8 +12,8 @@ geprüft werden kann, ob die vorab definierten Anforderungen erfüllt werden ode
 auftreten.
 
 Konzeptionell lassen sich die verschiedenen Arten und Techniken zum Testen von Software in die Kategorien White-Box-Testing 
-und Black-Box-Testing einteilen \cite{nidhra_black_2012}. Für das White-Box-Testing benötigt 
-der Tester und Testfallersteller Zugang zum Quellcode des Programms. Die Tests überprüfen primär die 
+und Black-Box-Testing einteilen \cite{nidhra_black_2012}. Für das White-Box-Testing benötigen
+Tester und Testfallersteller Zugang zum Quellcode des Programms. Die Tests überprüfen primär die 
 interne Logik und Struktur des Codes, indem Funktionen mit unterschiedlichen Parametern ausgeführt werden, um 
 möglichst viele logische Pfade im Programmablauf auf ihre Funktionalität untersuchen zu können \cite{verma_comparative_2017}.
 
@@ -50,10 +50,10 @@ Vor diesem Hintergrund erscheint es besonders relevant zu untersuchen, wie zuver
 kann, ohne Zugriff auf die konkrete Implementierung zu erhalten.
 
 Gerade aus diesem Grund ist für diese Untersuchung die Zweiteiligkeit eines Testfalls, bestehend aus Eingabe 
-und erwartetem Ergebnis besonders relevant. Beide Angaben werden von dem verwendeten \ac{LLM} 
-auf Basis einer natürlichsprachlichen Programmieraufgabe (Spezifikation des Sollverahltens) erzeugt.
+und erwartetem Ergebnis, besonders relevant. Beide Angaben werden von dem verwendeten \ac{LLM} 
+auf Basis einer natürlichsprachlichen Programmieraufgabe (Spezifikation des Sollverhaltens) erzeugt.
 Die empirische Forschung zeigt jedoch, dass die Korrektheit des vom 
-\ac{LLM} generierten erwarteten Ergenisses je nach Aufgabe und Untersuchungsaufbau deutlich variieren kann
+\ac{LLM} generierten erwarteten Ergebnisses je nach Aufgabe und Untersuchungsaufbau deutlich variieren kann
 \cite{wang_software_2024}. Die Korrektheit hängt davon ab, wie gut das Modell die Programmieraufgabe 
 verstanden hat und wie gut es damit in der Lage war, das Soll-Ergebnis der eigenen Testfälle vorherzusagen.
 Ein \ac{KI}-generierter Testfall wird in dieser Arbeit demnach erst als valide eingestuft, wenn die 
@@ -67,21 +67,21 @@ Um einordnen zu können, weshalb ein Large Language Model sowohl geeignete Testf
 Ergebnisse erzeugen kann, ist zunächst ein grundlegendes Verständnis seiner Funktionsweise erforderlich. 
 
 Moderne Large Language Models basieren überwiegend auf der von Vaswani et al. vorgestellten 
-Transformer-Architektur. Hierbei ermöglichen sogenannte Attention-Mechanismen unterschiedliche Stellen 
+Transformer-Architektur. Hierbei ermöglichen sogenannte Attention-Mechanismen, unterschiedliche Stellen 
 in einer sprachlichen Sequenz miteinander in Beziehung zu setzen \cite{vaswani_attention_2017}. 
 Auf dieses Projekt bezogen, können somit Zusammenhänge zwischen den Bedingungen einer natürlichsprachlichen 
-Programmieraufgaben, den darin definierten Eingabegrenzen und dem geforderten 
+Programmieraufgabe, den darin definierten Eingabegrenzen und dem geforderten 
 Rückgabewert modelliert und als Kontext während der Generierung der Antwort verwendet werden.
 
 Die Ausgabe eines Sprachmodells wird schrittweise in sogenannten Tokens erzeugt. Tokens stellen abhängig von der verwendeten 
 Tokenisierung vollständige Wörter oder Wortteile dar. Auf Basis der Eingabe und der bereits generierten Tokens berechnet 
 das Modell eine Wahrscheinlichkeitsverteilung für das jeweils nächste Token \cite{vaswani_attention_2017}. 
-Die Ausgabe eines generativen Sprachmodells stellt folglich keine bewiesen richtigen Fakten dar. 
+Die Ausgabe eines generativen Sprachmodells stellt folglich keine nachweislich korrekte Aussage dar. 
 Das Modell generiert eine sprachlich und strukturell wahrscheinliche Fortsetzung auf Grundlage der bisher verarbeiteten 
 Tokens und des gesammelten Kontexts. Bezogen auf die Generierung von Testfällen erklärt 
 dieses Verhalten, warum das Modell die Bedingungen und Vorgaben innerhalb einer Programmieraufgabe 
-zwar in Verbindung setzen und als Kontext in die Ausgabe mit einfließen lassen kann, es jedoch nicht 
-garantiert ist, dass die Ausgabe alle Vorgaben befolgt und fachlich korrekt ist \cite{huang_survey_2025}.  
+zwar in Verbindung setzen und als Kontext in die Ausgabe mit einfließen lassen kann, jedoch nicht 
+garantiert werden kann, dass die Ausgabe alle Vorgaben befolgt und fachlich korrekt ist \cite{huang_survey_2025}.  
 
 Für die Umsetzung des zu dieser Projektarbeit zugehörigen Assistenzsystems wird das von OpenAI bereitgestellte 
 Modell \acs{GPT}-4.1 mini verwendet. Die Wahl dieses Modells 

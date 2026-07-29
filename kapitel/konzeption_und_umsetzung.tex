@@ -6,13 +6,13 @@ Im Rahmen dieser Projektarbeit wurde ein webbasiertes Assistenzsystem zur
 Das Ziel des Assistenzsystems ist es, aus der Beschreibung einer
 Programmieraufgabe automatisiert Black-Box-Testfälle abzuleiten. Als
 Informationsgrundlage dient die Aufgabenbeschreibung oder die Spezifikation eines Programms
-und die Eingabebeschränkungen, die definieren welche Parameter als Input für das Programm erlaubt sind.
-Abbildung~\ref{fig:systemablauf} verdeutlicht den internen prozeduralen Ablauf der Anwendung.
+und die Eingabebeschränkungen, die definieren, welche Parameter als Input für das Programm erlaubt sind.
+Abbildung~\ref{fig:systemablauf} verdeutlicht den Ablauf der Anwendung.
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.8\textwidth]{assets/systemablauf.png}
-    \caption{Systemablauf innerhalb der Webanwendung \cite{openai_sol_2026}}
+    \caption{Systemablauf innerhalb der Webanwendung (Eigene Darstellung unter Verwendung von ChatGPT) \cite{openai_sol_2026}}
     \label{fig:systemablauf}
 \end{figure}
 
@@ -21,12 +21,12 @@ Abbildung~\ref{fig:architektur} stellt wiederum den technischen Aufbau des Assis
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.8\textwidth]{assets/architektur.png}
-    \caption{Architektur der Webanwendung \cite{openai_sol_2026}}
+    \caption{Architektur der Webanwendung (Eigene Darstellung unter Verwendung von ChatGPT) \cite{openai_sol_2026}}
     \label{fig:architektur}
 \end{figure}
 
 Die Anwendung besteht aus einem mit Python und dem Framework FastAPI \cite{fastapi_documentation}
-realisierten Backend sowie einer mit \acs{HTML}, \acs{CSS} \cite{openai_sol_2026} und JavaScript umgesetzten Benutzeroberfläche (Anhang~\ref{anhang:web-ui}). Beide Bestandteile werden gemeinsam innerhalb eines Serverprozesses 
+realisierten Backend sowie einer mit \acs{HTML}, \acs{CSS} und JavaScript umgesetzten Benutzeroberfläche (Anhang~\ref{anhang:web-ui}). Beide Bestandteile werden gemeinsam innerhalb eines Serverprozesses 
 betrieben. Über die Route \texttt{GET /} stellt das Backend die statischen Dateien der Benutzeroberfläche bereit und liefert sie an den Browser aus.
 Die Benutzeroberfläche ermöglicht die Eingabe einer natürlichsprachlichen Programmieraufgabe und sendet diese anschließend über eine \acs{HTTP}-POST-Anfrage an 
 den Endpunkt \texttt{POST /api}. Dort befindet sich die serverseitige Logik zur Verarbeitung der Anfrage und zur Generierung der Testfälle. Der Endpunkt übermittelt 
@@ -36,7 +36,7 @@ generierten Testfälle dargestellt werden.
 \subsection{Aufbau des System-Prompts}
 Um dem \ac{LLM} mehr Kontext und klare Vorgaben zu geben, wird jeder Anfrage ein einheitlicher und vorab festgelegter System-Prompt beigefügt.
 Dieser stellt eine wichtige Möglichkeit dar, das Verhalten des Modells und damit die Qualität der generierten Testfälle gezielt zu beeinflussen \cite{santana_software_2025}.
-Die vom Nutzer eingegebene konkrete Aufgabenbeschreibung wird davon getrennt als Benutzernachricht
+Die vom Nutzer eingegebene Aufgabenbeschreibung wird davon getrennt als Benutzernachricht
 übermittelt. Diese Trennung verhindert, dass Instruktionen zur Rolle des \ac{LLM}s, zum
 Ausgabeformat und zu den Qualitätsanforderungen bei jeder Anfrage erneut durch
 die Benutzeroberfläche bereitgestellt werden müssen. Gleichzeitig sorgt sie
@@ -72,15 +72,15 @@ Der System-Prompt setzt sich konzeptionell aus fünf Bestandteilen zusammen:
           Feld \texttt{expected}, welches das vom Modell erwartete Ergebnis speichert.
 \end{enumerate}
 
-Der ganzheitliche System-Prompt kann Anhang~\ref{anhang:system-prompt} entnommen werden.
+Der vollständige System-Prompt kann Anhang~\ref{anhang:system-prompt} entnommen werden.
 
 Trotz der präzisen Vorgaben stellt der Prompt keine formale Garantie für ein 
 gültiges Ausgabeformat, eingehaltene Constraints oder fachlich korrekte Sollwerte dar.
-Wie im vorherigen Kapitel beschrieben erzeugt ein \ac{LLM} seine Antwort auf Basis 
+Wie im vorherigen Kapitel beschrieben, erzeugt ein \ac{LLM} seine Antwort auf Basis 
 von Wahrscheinlichkeitsverteilungen und überführt die
 beschriebenen Funktionalitäten nicht zwangsläufig in korrekte Ausgaben. 
 Aus diesem Grund werden die generierten Testfälle in der anschließenden Evaluation zunächst mit einer
-korrekten Referenzimplementierung validiert und erst nach Ausschluss
+korrekten Referenzimplementierung validiert. Erst nach Ausschluss
 unzulässiger Eingaben und fehlerhafter Sollwerte wird beurteilt, ob die
 verbleibenden Testfälle bewusst fehlerhafte Implementierungen erkennen.
 
