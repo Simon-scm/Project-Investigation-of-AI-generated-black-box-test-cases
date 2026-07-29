@@ -1,8 +1,5 @@
 # ToDo
 
-In Fazit vielleicht doch nochmal die Ergebnisse der Untersuchung (Zahlen) nennen 
-und vielleicht noch auf Unabhängigkeit zwischen Code und Testfallgenerierung eingehen.
-
 Wortanzahl durch KI genau ermitteln lassen und auf Deckblatt schreiben!
 
 Schlechte Seitenumbrüche beheben - Erst wenn alles final ist!
