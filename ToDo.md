@@ -1,14 +1,8 @@
 # ToDo
 
-Wortanzahl durch KI genau ermitteln lassen und auf Deckblatt schreiben!
-
-Schlechte Seitenumbrüche beheben - Erst wenn alles final ist!
 
 PDF so erzeugen das hotlinks noch verwendbar sind. Und PDF auch komplett neu bauen lassen!
 
-Source code mit Kommentaren füllen - Kommentare überprüfen.
-Anleitung zum starten der Anwendung in die Zusatzdokumente.
-API-Key löschen wenn Noten da sind - Prof irgendwie darüber informieren?
 
 Zip-Aufbau:
 Anlagen 
